@@ -4,7 +4,9 @@ import '../../assets/styles/util.css';
 import "./ShoppingCart.css"
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import 'font-awesome/css/font-awesome.min.css';
 import 'material-design-iconic-font/dist/css/material-design-iconic-font.min.css';
+
 import Header from "../../components/Header";
 import Cart from "./Cart";
 import useCartAndSidebar from "../../hooks/useCartAndSidebar";
