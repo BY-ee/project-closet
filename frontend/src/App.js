@@ -1,21 +1,21 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import DetailItem from "./pages/DetailItem/DetailItem";
-import Home from "./pages/main/Home";
+import DetailItem from './pages/DetailItem/DetailItem';
+import Home from './pages/main/Home';
+import ShoppingCart from './pages/cart/ShoppingCart';
 
 const AppRoutes = () => (
-
-    <Router>
-        <Routes>
-            <Route path="/" element={<Home />} />
-{/*
+  <Router>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/ShoppingCart" element={<ShoppingCart />} />
+      {/*
             <Route path="/" element={<DetailItem/>} />
 */}
-            {/* 추가 라우트 */}
-        </Routes>
-    </Router>
-
+      {/* 추가 라우트 */}
+    </Routes>
+  </Router>
 );
 
 export default AppRoutes;
