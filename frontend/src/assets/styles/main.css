@@ -353,7 +353,7 @@ a {
 
 .main-menu {
   list-style-type: none;
-  margin: 0;
+  margin-left: -30px;
 
   display: -webkit-box;
   display: -webkit-flex;
