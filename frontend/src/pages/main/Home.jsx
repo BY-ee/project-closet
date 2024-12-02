@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import "../../assets/styles/main.css"
 import "../../assets/styles/util.css"
 import "slick-carousel/slick/slick.css";

@@ -67,7 +67,7 @@ function Header({ toggleCart }) {
                                     <a href="/shop">Shop</a>
                                 </li>
                                 <li className="label1" data-label1="hot">
-                                    <a href="/features">Features</a>
+                                    <a href="/ShoppingCart">Features</a>
                                 </li>
                                 <li>
                                     <a href="/blog">Blog</a>
