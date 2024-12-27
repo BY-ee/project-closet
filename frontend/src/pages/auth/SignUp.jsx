@@ -1,6 +1,5 @@
 import React, { useRef, useState } from 'react';
-import '../../components/SignUp';
-import '../../assets/styles/auth/signup.css';
+import './SignUp.css';
 import closetImage from '../../assets/closet.png'; // 이미지 경로를 import
 import { useNavigate } from 'react-router-dom';
 import {
@@ -12,7 +11,7 @@ import {
   signup,
 } from '../../api/auth/ApiService';
 
-const Checkout = () => {
+const SignUp = () => {
   const formRef = useRef(null); // 폼 참조
   const navigate = useNavigate(); // 페이지 네비게이션 훅
 
@@ -433,4 +432,4 @@ const Checkout = () => {
   );
 };
 
-export default Checkout;
+export default SignUp;

@@ -35,7 +35,7 @@ export default function Product({ products, activeCategory, activeFilter }) {
   };
 
   const handleNavigate = () => {
-    navigate(`/Detail/${productId}`);
+    navigate(`/products/${productId}`);
   };
 
   // 상품 id 상태값이 변경될 때마다 실행

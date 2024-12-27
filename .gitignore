@@ -10,54 +10,55 @@
 *.rej
 .DS_Store
 Thumbs.db
-/.idea
 node_modules
+.idea
+.vscode
 
 # 환경 설정 파일 (Environment Files)
 .env
-.env.*  # .env.local, .env.development 등 모두 포함
+.env.*
 
 # ------------------------
-# Spring Boot (application/)
+# Spring Boot (backend/)
 # ------------------------
-application/HELP.md
-application/.gradle/
-application/build/
-!application/gradle/wrapper/gradle-wrapper.jar
-application/application-secret.properties
+!backend/gradle/wrapper/gradle-wrapper.jar
+backend/HELP.md
+backend/.gradle/
+backend/build/
+backend/application-secret.properties
 
 # IDE 및 빌드 관련 파일
-application/.classpath
-application/.project
-application/.settings/
-application/.factorypath
-application/.apt_generated
-application/.springBeans
-application/.sts4-cache
-application/bin/
-application/out/
-application/nbproject/private/
-application/nbbuild/
-application/dist/
-application/nbdist/
-application/.nb-gradle/
-application/.idea/
-application/*.iws
-application/*.iml
-application/*.ipr
-application/workspace-spring-tool-suite-4-*/
+backend/.classpath
+backend/.project
+backend/.settings/
+backend/.factorypath
+backend/.apt_generated
+backend/.springBeans
+backend/.sts4-cache
+backend/bin/
+backend/out/
+backend/nbproject/private/
+backend/nbbuild/
+backend/dist/
+backend/nbdist/
+backend/.nb-gradle/
+backend/.idea/
+backend/*.iws
+backend/*.iml
+backend/*.ipr
+backend/workspace-spring-tool-suite-4-*/
 
 # 특정 디렉토리의 빌드 및 바이너리 파일 제외
-!application/src/main/**/build/
-!application/src/test/**/build/
-!application/src/main/**/bin/
-!application/src/test/**/bin/
-!application/src/main/**/out/
-!application/src/test/**/out/
+!backend/src/main/**/build/
+!backend/src/test/**/build/
+!backend/src/main/**/bin/
+!backend/src/test/**/bin/
+!backend/src/main/**/out/
+!backend/src/test/**/out/
 
 # 패키지 락 파일
-application/package-lock.json
-application/yarn.lock
+backend/package-lock.json
+backend/yarn.lock
 
 # ------------------------
 # React (frontend/)
@@ -75,7 +76,7 @@ frontend/yarn-error.log*
 
 # 환경 설정 파일
 frontend/.env
-frontend/.env.*  # .env.local, .env.development 등 모두 포함
+frontend/.env.*
 
 # 테스트 관련 파일
 frontend/.jest-cache/
@@ -88,5 +89,3 @@ frontend/.vscode/
 # 패키지 락 파일
 frontend/package-lock.json
 frontend/yarn.lock
-node_modules
-node_modules

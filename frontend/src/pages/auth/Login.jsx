@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import { signin } from '../../api/auth/ApiService';
 import { useNavigate } from 'react-router-dom';
 import '../../assets/styles/auth/login.css';
 import closetImage from '../../assets/closet.png'; // 이미지 경로
 import NaverImage from '../../assets/btnG_완성형.png'; // 이미지 경로
 import KaKaoImage from '../../assets/kakao_login_medium_narrow.png'; // 이미지 경로
-import { useUser } from '../../api/auth/UserContext';
+import { useUser } from '../../contexts/UserContext';
 
-const LoginForm = () => {
+const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState(''); // 에러 메시지 상태
@@ -237,4 +236,4 @@ const LoginForm = () => {
     </div>
   );
 };
-export default LoginForm;
+export default Login;

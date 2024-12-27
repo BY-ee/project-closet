@@ -94,12 +94,6 @@ export const signup = async (data) => {
 };
 
 /**
- * !!! 직접 사용금지 !!!
- *
- * !!! 비밀번호 노출 !!!
- *
- * !!! UserProvider 사용 !!!
- *
  * ~~사용자 정보를 가져오는 함수입니다.~~
  *
  * ~~@returns {Promise<CustomUserDetail>} 현재 로그인된 사용자의 데이터를 포함한 객체입니다.~~

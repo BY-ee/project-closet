@@ -116,7 +116,7 @@
 }
 
 /* 문의내역 css */
-.inquirement-label {
+.inquiry-label {
   padding-left: 20px;
   font-size: 20px;
   display: flex;
@@ -128,7 +128,7 @@
 }
 
 @media (max-width: 768px) {
-  .inquirement-label {
+  .inquiry-label {
     padding-left: 10px; /* 좁은 화면에서는 여백 */
     flex-direction: column; /* 세로 정렬로 변경 */
     justify-content: center; /* 세로 정렬 상태에서도 가로 중앙 정렬 유지 */
@@ -138,7 +138,7 @@
 }
 
 @media (max-width: 480px) {
-  .inquirement-label {
+  .inquiry-label {
     padding-left: 5px; /* 여백 줄임 */
     font-size: 18px; /* 텍스트 크기 줄임 */
     justify-content: center; /* 가로 중앙 정렬 */
