@@ -1,8 +1,13 @@
+// Hooks
 import React, { useState, useEffect } from 'react';
-import Pagination from './Pagination'; // 분리된 Pagination 컴포넌트 임포트
-import { call } from '../../api/auth/ApiService';
-import { useUser } from '../../contexts/UserContext';
-import '../../assets/styles/myPage/MyPage.css';
+import { useUser } from '../../../contexts/UserContext';
+
+// CSS
+import '../../../assets/styles/mypage/mypage.css';
+
+// Components
+import Pagination from '../../../components/common/Pagination';
+import { call } from '../../../api/auth/ApiService';
 
 const MyReservation = () => {
   const { user } = useUser();

@@ -1,7 +1,10 @@
+// Hooks
 import React, { useState } from 'react';
+
+// Components
 import { Dropdown, Modal, Button } from 'react-bootstrap';
 
-export default function Alarm() {
+const AlarmModal = () => {
   const [showModal, setShowModal] = useState(false);
 
   const handleShowModal = () => {
@@ -45,4 +48,6 @@ export default function Alarm() {
       </Dropdown>
     </>
   );
-}
+};
+
+export default AlarmModal;

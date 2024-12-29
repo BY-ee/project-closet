@@ -1,8 +1,11 @@
+// Hooks
 import React, { useState, useEffect } from 'react';
-import Pagination from './Pagination'; // 페이지네이션 컴포넌트
-import { call } from '../../api/auth/ApiService';
 
-const Myinquiry = () => {
+// Components
+import Pagination from '../../../components/common/Pagination';
+import { call } from '../../../api/auth/ApiService';
+
+const MyInquiries = () => {
   const [myInquiries, setMyInquiries] = useState([]); // 문의 내역 상태
   const [totalPages, setTotalPages] = useState(0); // 전체 페이지 수
   const [currentPage, setCurrentPage] = useState(0); // 현재 페이지
@@ -153,4 +156,4 @@ const Myinquiry = () => {
   );
 };
 
-export default Myinquiry;
+export default MyInquiries;

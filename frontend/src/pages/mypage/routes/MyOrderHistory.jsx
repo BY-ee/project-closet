@@ -1,10 +1,14 @@
+// Hooks
 import React, { useState, useEffect } from 'react';
-import { call } from '../../api/auth/ApiService';
-import { useUser } from '../../contexts/UserContext';
+import { useUser } from '../../../contexts/UserContext';
 
-import '../../assets/styles/myPage/MyPage.css';
+// CSS
+import '../../../assets/styles/mypage/mypage.css';
 
-const MyPurchaseHistory = () => {
+// Components
+import { call } from '../../../api/auth/ApiService';
+
+const MyOrderHistory = () => {
   const { user } = useUser(); // 사용자 정보
   const [groupedPurchases, setGroupedPurchases] = useState([]); // 그룹화된 데이터 상태
   const [error, setError] = useState(null);
@@ -113,4 +117,4 @@ const MyPurchaseHistory = () => {
   );
 };
 
-export default MyPurchaseHistory;
+export default MyOrderHistory;

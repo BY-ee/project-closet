@@ -1,6 +1,9 @@
+// Hooks
 import { useEffect, useState } from 'react';
+
+// Components
 import { Table, Form, Button } from 'react-bootstrap';
-import { getGrade, updateGrade } from '../../../../api/admin/user/user';
+import { getGrade, updateGrade } from '../../../../../api/admin/user/user';
 
 const UserGrade = () => {
   const [grades, setGrades] = useState([]);

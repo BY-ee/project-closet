@@ -1,6 +1,10 @@
+// Hooks
 import { useEffect, useState } from 'react';
+
+// Components
 import { Form, Button, Row, Col, Table, Pagination } from 'react-bootstrap';
-import { getItem } from '../../../../api/admin/item/item';
+import { getItem } from '../../../../../api/admin/item/item';
+
 const Stock = () => {
   const [stocks, setStocks] = useState([]);
   const [totalPages, setTotalPages] = useState(0);

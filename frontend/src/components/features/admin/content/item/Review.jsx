@@ -1,6 +1,9 @@
+// Hooks
 import { useEffect, useState } from 'react';
+
+// Components
 import { Form, Button, Row, Col, Table, Pagination } from 'react-bootstrap';
-import { getReview } from '../../../../api/admin/item/item';
+import { getReview } from '../../../../../api/admin/item/item';
 
 const Review = () => {
   const [reviews, setReviews] = useState([]);

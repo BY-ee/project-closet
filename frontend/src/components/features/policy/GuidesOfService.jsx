@@ -1,7 +1,4 @@
-// import CSS
-import '../../assets/styles/components/footer.css';
-
-export default function Guide() {
+const GuidesOfService = () => {
   return (
     <>
       <h3 className="guide-subtitle">이용안내</h3>
@@ -459,4 +456,6 @@ export default function Guide() {
       </div>
     </>
   );
-}
+};
+
+export default GuidesOfService;

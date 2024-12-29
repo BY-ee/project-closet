@@ -1,4 +1,7 @@
+// Hooks
 import React, { useEffect, useState } from 'react';
+
+// Components
 import { Form, Button, Row, Col, Table } from 'react-bootstrap';
 import { Bar } from 'react-chartjs-2';
 import {
@@ -11,7 +14,10 @@ import {
   Legend,
 } from 'chart.js';
 
-import { getOrderMonth, getOrderDate } from '../../../../api/admin/order/order';
+import {
+  getOrderMonth,
+  getOrderDate,
+} from '../../../../../api/admin/order/order';
 
 // Chart.js 모듈 등록
 ChartJS.register(

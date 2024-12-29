@@ -1,3 +1,4 @@
+// Components
 import { Form, Button, Row, Col, Table } from 'react-bootstrap';
 
 const Event = () => {

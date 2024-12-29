@@ -1,21 +1,21 @@
-// hooks
+// Hooks
 import React, { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { useUser } from '../../contexts/UserContext';
-import { useCart } from '../../api/basket/BasketContext';
-import { call } from '../../api/auth/ApiService';
-
-// css
-import '../../assets/styles/components/main.css';
-import '../../assets/styles/components/util.css';
-import '../../assets/styles/detailItem/Detail.css';
-
-// components
+import { useCart } from '../../contexts/BasketContext';
 import useProductQuantity from '../../hooks/useProductQuantity';
-import ReviewInput from './ReviewInput';
-import ItemInquiry from './ItemInquiry';
 
-function Detail() {
+// CSS
+import '../../assets/styles/common/main.css';
+import '../../assets/styles/common/util.css';
+import './ProductDetail.css';
+
+// Components
+import { call } from '../../api/auth/ApiService';
+import ProductReviews from '../../components/features/product/ProductReviews';
+import ProductInquiries from '../../components/features/product/ProductInquiries';
+
+const ProductDetail = () => {
   const location = useLocation();
   const { user, loading } = useUser(); // useUser에서 loading 상태 가져오기
   // ----------------------------------------------------------------
@@ -516,14 +516,14 @@ function Detail() {
                     </div>
 
                     {/* * Reviews Tab */}
-                    <ReviewInput
+                    <ProductReviews
                       activeTab={activeTab}
                       userId={userId}
                       productId={currentProductId}
                     />
 
                     {/** Inquiry Tab */}
-                    <ItemInquiry
+                    <ProductInquiries
                       activeTab={activeTab}
                       userId={userId}
                       productId={currentProductId}
@@ -544,6 +544,6 @@ function Detail() {
       )}
     </>
   );
-}
+};
 
-export default Detail;
+export default ProductDetail;

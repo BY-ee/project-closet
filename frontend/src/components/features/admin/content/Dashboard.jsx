@@ -1,8 +1,11 @@
+// CSS
+import '../../../../assets/styles/admin/admin.css';
+
+// Components
 import { Table, Row, Col } from 'react-bootstrap';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import ChartDataLabels from 'chartjs-plugin-datalabels'; // 플러그인 import
-import '../../../assets/styles/admin/admin.css';
 
 // Chart.js 모듈 등록
 ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);

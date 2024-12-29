@@ -1,4 +1,4 @@
-import { fetchAPI } from '../common/config';
+// Components
 import { call } from '../../../api/auth/ApiService';
 
 // 게시판 목록 조회

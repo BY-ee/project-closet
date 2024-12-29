@@ -1,4 +1,4 @@
-const Category = ({ activeCategory, handleCategory }) => {
+const ProductCategoryList = ({ activeCategory, handleCategory }) => {
   const categories = [
     { label: 'All', category: '*' },
     { label: '아우터', category: 'Outerwear' },
@@ -25,4 +25,4 @@ const Category = ({ activeCategory, handleCategory }) => {
   );
 };
 
-export default Category;
+export default ProductCategoryList;

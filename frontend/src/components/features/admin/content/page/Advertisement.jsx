@@ -1,3 +1,4 @@
+// Components
 import { Table } from 'react-bootstrap';
 
 const Advertisement = () => {

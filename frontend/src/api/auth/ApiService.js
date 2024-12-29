@@ -1,6 +1,4 @@
-import 'react-toastify/dist/ReactToastify.css';
-
-const API_BASE_URL = 'http://13.209.5.239/api'; // 서버 URL
+const API_BASE_URL = 'http://localhost:8090/api'; // 서버 URL
 
 /**
  * API 호출을 처리하는 함수입니다.

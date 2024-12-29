@@ -1,4 +1,7 @@
+// Hooks
 import React, { createContext, useContext, useState, useCallback } from 'react';
+
+// Components
 import { call } from '../api/auth/ApiService';
 
 const BasketContext = createContext();

@@ -1,3 +1,4 @@
+// Hooks
 import React from 'react';
 
 const Pagination = ({ currentPage, totalPages, blockSize, onPageChange }) => {

@@ -1,6 +1,9 @@
+// Hooks
 import { useEffect, useState } from 'react';
+
+// Components
 import { Form, Button, Row, Col, Table, Pagination } from 'react-bootstrap';
-import { getPointUser } from '../../../../api/admin/user/user';
+import { getPointUser } from '../../../../../api/admin/user/user';
 
 const Point = () => {
   const [points, setPoints] = useState([]);

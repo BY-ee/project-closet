@@ -1,8 +1,13 @@
+// Hooks
 import React, { useState, useEffect } from 'react';
-import { useUser } from '../../contexts/UserContext';
-import 'bootstrap-icons/font/bootstrap-icons.css';
 import { useNavigate } from 'react-router-dom';
-import { call } from '../../api/auth/ApiService';
+import { useUser } from '../../../contexts/UserContext';
+
+// CSS
+import 'bootstrap-icons/font/bootstrap-icons.css';
+
+// Components
+import { call } from '../../../api/auth/ApiService';
 
 const MyPageHome = () => {
   const navigate = useNavigate();

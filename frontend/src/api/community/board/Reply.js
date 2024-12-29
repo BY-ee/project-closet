@@ -1,5 +1,5 @@
+// Components
 import { call } from '../../auth/ApiService';
-import { fetchAPI } from '../common/config';
 
 // 댓글 조회
 export const getRepliesByBoardId = async (boardId) => {

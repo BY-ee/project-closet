@@ -1,6 +1,9 @@
+// Hooks
 import { useEffect, useState } from 'react';
+
+// Components
 import { Form, Button, Row, Col, Table, Pagination } from 'react-bootstrap';
-import { getDelivery } from '../../../../api/admin/order/order';
+import { getDelivery } from '../../../../../api/admin/order/order';
 
 const Delivery = () => {
   const [delivery, setDelivery] = useState([]);

@@ -1,5 +1,7 @@
+/**
+ *  금액을 한국 원화 형식으로 변환하는 함수입니다.
+ */
 const formatToKRW = (price) => {
-  // 금액을 한국 원화 형식으로 변환
   return new Intl.NumberFormat('ko-KR', {
     style: 'currency',
     currency: 'KRW',

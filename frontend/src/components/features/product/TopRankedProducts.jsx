@@ -1,14 +1,17 @@
+// Hooks
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-// import CSS
-import '../../assets/styles/main/TopRankedItems.css';
+// CSS
+import './TopRankedProducts.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import Slider from 'react-slick';
-import { call } from '../../api/auth/ApiService';
 
-export default function TopRankedItems() {
+// Components
+import Slider from 'react-slick';
+import { call } from '../../../api/auth/ApiService';
+
+const TopRankedProducts = () => {
   const [category, setCategory] = useState('itemPrice'); // 카멜케이스로 수정
   const [subject, setSubject] = useState('week'); // 주간, 월간 랭킹 등을 위한 상태값
   const [rankedItems, setRankedItems] = useState([]); // 순위 상위권 상품 상태
@@ -150,4 +153,6 @@ export default function TopRankedItems() {
       </div>
     </div>
   );
-}
+};
+
+export default TopRankedProducts;

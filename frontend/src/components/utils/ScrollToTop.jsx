@@ -1,7 +1,11 @@
+// Hooks
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-export default function ScrollToTop() {
+/**
+ * 페이지 이동 시 스크롤을 최상단으로 전환하는 컴포넌트입니다.
+ */
+const ScrollToTop = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -10,4 +14,6 @@ export default function ScrollToTop() {
   }, [pathname]);
 
   return null;
-}
+};
+
+export default ScrollToTop;

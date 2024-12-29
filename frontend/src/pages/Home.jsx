@@ -1,27 +1,22 @@
-import 'material-design-iconic-font/dist/css/material-design-iconic-font.min.css';
+// Hooks
 import React, { useEffect, useState } from 'react';
 
-// Import CSS
-import '../assets/styles/components/main.css';
-import '../assets/styles/components/util.css';
-import '../assets/styles/home/Home.css';
+// CSS
+import '../assets/styles/common/main.css';
+import '../assets/styles/common/util.css';
+import './Home.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import 'material-design-iconic-font/dist/css/material-design-iconic-font.min.css';
 
-// Import Hooks
-import Product from './main/Product';
-
-// Import Components
-import Category from '../hooks/category/Category';
-import FilterSearch from './main/FilterSearch';
+// Components
 import { call } from '../api/auth/ApiService';
+import TopRankedProducts from '../components/features/product/TopRankedProducts';
+import ProductCategoryList from '../components/features/product/ProductCategoryList';
+import FilterSearchModal from '../components/features/home/FilterSearchModal';
+import ProductCard from '../components/features/product/ProductCard';
 
-// Import API
-import TopRankedItems from '../components/main/TopRankedItems';
-
-// Function Aria
-function Home() {
+const Home = () => {
   const [activeCategory, setActiveCategory] = useState('*'); // 카테고리 상태
   const [activeFilter, setActiveFilter] = useState('sortByRecent'); // 필터 상태
   const [products, setProducts] = useState([]);
@@ -79,7 +74,7 @@ function Home() {
       </section>
 
       {/* Banner */}
-      <TopRankedItems />
+      <TopRankedProducts />
 
       {/* Product Overview */}
       <section className="bg0 p-t-23 p-b-140">
@@ -92,18 +87,18 @@ function Home() {
 
           {/* Category & Filter & Search */}
           <div className="flex-w flex-sb-m p-b-52">
-            <Category
+            <ProductCategoryList
               activeCategory={activeCategory}
               handleCategory={handleCategory}
             />
-            <FilterSearch
+            <FilterSearchModal
               activeFilter={activeFilter}
               handleFilter={handleFilter}
             />
           </div>
 
           {/* Product */}
-          <Product
+          <ProductCard
             products={products}
             activeCategory={activeCategory}
             activeFilter={activeFilter}
@@ -122,6 +117,6 @@ function Home() {
       </section>
     </>
   );
-}
+};
 
 export default Home;

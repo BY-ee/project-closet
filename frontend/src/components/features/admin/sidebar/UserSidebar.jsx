@@ -1,4 +1,7 @@
+// Hooks
 import React from 'react';
+
+// Components
 import { FaChartBar, FaCoins, FaRegAddressCard, FaUsers } from 'react-icons/fa';
 
 const UserSidebar = ({ activeMenu, handleMenuClick }) => {

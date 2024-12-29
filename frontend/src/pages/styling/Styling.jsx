@@ -1,11 +1,14 @@
+// Hooks
 import React, { useState } from 'react';
-import './Styling.css';
 import { useUser } from '../../contexts/UserContext';
 
-// import Component
-import ReservationModal from './ReservationModal';
+// CSS
+import './Styling.css';
 
-function Styling() {
+// Components
+import ReservationModal from '../../components/features/styling/ReservationModal';
+
+const Styling = () => {
   const [isBookModalOpen, setIsBookModalOpen] = useState(false); // 예약창 열림 상태
   const [coordiId, setCoordiId] = useState(1); // 현재 예약 신청 중인 코디네이터
   const { user } = useUser();
@@ -116,6 +119,6 @@ function Styling() {
       </div>
     </>
   );
-}
+};
 
 export default Styling;

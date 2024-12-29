@@ -1,4 +1,7 @@
+// Hooks
 import React from 'react';
+
+// Components
 import { FaBullhorn, FaCalendar, FaAdversal } from 'react-icons/fa';
 
 const PageSidebar = ({ activeMenu, handleMenuClick }) => {

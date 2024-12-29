@@ -1,21 +1,22 @@
-// import CSS
+// Hooks
 import { useState } from 'react';
-import '../../assets/styles/components/footer.css';
-import ServiceAgreement from './ServiceAgreement';
-import GiftcardAgreement from './GiftcardAgreement';
 
-export default function Agreement() {
+// Components
+import TermsOfService from './TermsOfService';
+import TermsOfPoints from './TermsOfPoints';
+
+const TermsSwitcher = () => {
   const [service, setService] = useState(true);
-  const [giftcard, setGiftcard] = useState(false);
+  const [points, setPoints] = useState(false);
 
   const handleService = () => {
     setService(true);
-    setGiftcard(false);
+    setPoints(false);
   };
 
-  const handleGiftcard = () => {
+  const handlePoints = () => {
     setService(false);
-    setGiftcard(true);
+    setPoints(true);
   };
 
   return (
@@ -31,8 +32,8 @@ export default function Agreement() {
           서비스 이용약관
         </button>
         <button
-          className={`p-all-20 p-lr-60 border ${giftcard ? 'selected-btn' : ''}`}
-          onClick={handleGiftcard}
+          className={`p-all-20 p-lr-60 border ${points ? 'selected-btn' : ''}`}
+          onClick={handlePoints}
         >
           상품권 이용약관
         </button>
@@ -46,9 +47,9 @@ export default function Agreement() {
           >
             <div className="agreement-box">
               {service ? (
-                <ServiceAgreement />
-              ) : giftcard ? (
-                <GiftcardAgreement />
+                <TermsOfService />
+              ) : points ? (
+                <TermsOfPoints />
               ) : (
                 <div style={{ textAlign: 'center', paddingRight: '33.75px' }}>
                   <div className="spinner-border" role="status">
@@ -62,4 +63,6 @@ export default function Agreement() {
       </div>
     </>
   );
-}
+};
+
+export default TermsSwitcher;

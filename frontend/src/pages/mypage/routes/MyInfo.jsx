@@ -1,10 +1,12 @@
+// Hooks
 import React, { useEffect, useState } from 'react';
-import { call } from '../../api/auth/ApiService'; // useUser 훅 임포트
-import { useUser } from '../../contexts/UserContext'; // useUser 훅 임포트
+import { useUser } from '../../../contexts/UserContext'; // useUser 훅 임포트
 
+// Components
+import { call } from '../../../api/auth/ApiService'; // useUser 훅 임포트
 import DaumPostcode from 'react-daum-postcode'; // Kakao 우편번호 API 사용
 
-const MemberInfo = () => {
+const MyInfo = () => {
   const [representativeAddress, setRepresentativeAddress] = useState(null);
   const [generalAddresses, setGeneralAddresses] = useState([]);
   const { user, setUser } = useUser(); // UserContext에서 user와 setUser를 가져오기
@@ -657,4 +659,4 @@ const MemberInfo = () => {
   );
 };
 
-export default MemberInfo;
+export default MyInfo;

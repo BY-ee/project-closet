@@ -1,7 +1,10 @@
+// Hooks
 import { useEffect, useState } from 'react';
+
+// Components
 import { Form, Button, Row, Col, Table, Pagination } from 'react-bootstrap';
-import { getGrade, getUserAdmin } from '../../../../api/admin/user/user';
-import '../../../../assets/styles/admin/user.css';
+import { getGrade, getUserAdmin } from '../../../../../api/admin/user/user';
+import '../../../../../assets/styles/admin/user.css';
 const User = () => {
   const [users, setUsers] = useState([]);
   const [totalPages, setTotalPages] = useState(0);

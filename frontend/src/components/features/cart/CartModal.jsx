@@ -1,10 +1,13 @@
-import React, { useCallback, useEffect } from 'react';
+// Hooks
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useCart } from '../../contexts/BasketContext';
-import { useUser } from '../../contexts/UserContext';
+import { useCart } from '../../../contexts/BasketContext';
+import { useUser } from '../../../contexts/UserContext';
+
+// CSS
 import './CartModal.css';
 
-function Cart({ isCartOpen, setIsCartOpen }) {
+const CartModal = ({ isCartOpen, setIsCartOpen }) => {
   const { baskets, removeFromCart, fetchBaskets } = useCart();
   const { user } = useUser();
 
@@ -130,6 +133,6 @@ function Cart({ isCartOpen, setIsCartOpen }) {
       </div>
     </div>
   );
-}
+};
 
-export default Cart;
+export default CartModal;

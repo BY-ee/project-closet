@@ -1,13 +1,14 @@
+// Hooks
 import { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 
-export default function MobileMenu({
+const MobileMenuModal = ({
   isMenuOpen,
   setIsMenuOpen,
   isLoggedIn,
   user,
   handleLogout,
-}) {
+}) => {
   const handleMenuClick = useCallback(
     (e) => {
       const tag = e.target.tagName;
@@ -87,4 +88,6 @@ export default function MobileMenu({
       </ul>
     </div>
   );
-}
+};
+
+export default MobileMenuModal;

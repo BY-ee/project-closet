@@ -1,23 +1,19 @@
+// Hooks
 import React, { useState, useEffect } from 'react';
-import { savePoint } from '../../api/point/FetchSavePoint';
 
-/** custom css 및 react icon   */
-import '../../assets/styles/detailItem/ReviewInput.css';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+// CSS
+import '../../../assets/styles/review/review.css';
 
-/** components */
-import StarRating from '../../components/rating/StarRating';
-
-/** import Hook */
-import { call } from '../../api/auth/ApiService';
-
-/** api */
-import FetchAllReview from '../../api/review/FetchAllReview';
+// Images
 import LockIcon from '@mui/icons-material/Lock';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 
-function ReviewInput({ activeTab, userId, productId }) {
-  /** 리뷰, 드롭다운 상태, 폼 입력 상태를 관리하기 위한 state */
+// Components
+import StarRating from '../../../components/common/StarRating';
+import { call } from '../../../api/auth/ApiService';
+
+const ProductReviews = ({ activeTab, userId, productId }) => {
   const [reviews, setReviews] = useState([]);
   const [dropdownStates, setDropdownStates] = useState({});
   const [reviewImage, setReviewImage] = useState('');
@@ -174,6 +170,24 @@ function ReviewInput({ activeTab, userId, productId }) {
       alert('리뷰 저장 실패');
     }
   };
+
+  /** 포인트 저장 함수 */
+  async function savePoint(PointData) {
+    try {
+      const response = await call(
+        `/point/saveReviewPoint`,
+        'POST',
+        JSON.stringify(PointData)
+      );
+      console.log(response);
+
+      if (!response.ok) {
+        // throw new Error('Failed to save point');
+      }
+    } catch (error) {
+      console.error('Error saving point:', error);
+    }
+  }
 
   /** 평점 변경 핸들러 */
   const handleRatingChange = (score) => {
@@ -350,6 +364,6 @@ function ReviewInput({ activeTab, userId, productId }) {
       )}
     </>
   );
-}
+};
 
-export default ReviewInput;
+export default ProductReviews;

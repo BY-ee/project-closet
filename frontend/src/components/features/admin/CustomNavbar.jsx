@@ -1,6 +1,11 @@
-import { Button, Nav, Navbar } from 'react-bootstrap';
+// Hooks
 import { Link, useLocation } from 'react-router-dom';
-import '../../assets/styles/admin/admin.css';
+
+// CSS
+import '../../../assets/styles/admin/admin.css';
+
+// Components
+import { Button, Nav, Navbar } from 'react-bootstrap';
 
 const CustomNavbar = ({ onMenuClick }) => {
   const location = useLocation(); // 현재 경로 가져오기

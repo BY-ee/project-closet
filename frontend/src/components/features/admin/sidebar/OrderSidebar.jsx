@@ -1,4 +1,7 @@
+// Hooks
 import React from 'react';
+
+// Components
 import {
   FaChartBar,
   FaExchangeAlt,

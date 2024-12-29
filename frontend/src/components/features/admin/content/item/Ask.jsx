@@ -1,6 +1,9 @@
+// Hooks
 import { useEffect, useState } from 'react';
+
+// Components
 import { Form, Button, Row, Col, Table, Pagination } from 'react-bootstrap';
-import { getAsk } from '../../../../api/admin/item/item';
+import { getAsk } from '../../../../../api/admin/item/item';
 
 const Ask = () => {
   const [asks, setAsks] = useState([]);

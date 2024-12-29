@@ -1,6 +1,7 @@
+// Hooks
 import { useState } from 'react';
 
-const FilterSearch = ({ activeFilter, handleFilter }) => {
+const FilterSearchModal = ({ activeFilter, handleFilter }) => {
   const [isFiltering, setIsFiltering] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
 
@@ -183,4 +184,4 @@ const FilterSearch = ({ activeFilter, handleFilter }) => {
   );
 };
 
-export default FilterSearch;
+export default FilterSearchModal;

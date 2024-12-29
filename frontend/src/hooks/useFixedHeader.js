@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-function useFixedHeader() {
+const useFixedHeader = () => {
   const [isAtTop, setIsAtTop] = useState(true);
 
   useEffect(() => {
@@ -13,6 +13,6 @@ function useFixedHeader() {
   }, []);
 
   return isAtTop;
-}
+};
 
 export default useFixedHeader;

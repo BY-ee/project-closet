@@ -1,6 +1,9 @@
+// Hooks
 import { useEffect, useState } from 'react';
+
+// Components
 import { Form, Button, Row, Col, Table, Pagination } from 'react-bootstrap';
-import { getNotice } from '../../../../api/admin/page/page';
+import { getNotice } from '../../../../../api/admin/page/page';
 
 const Notice = () => {
   const [notices, setNotices] = useState([]);

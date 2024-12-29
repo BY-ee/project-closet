@@ -1,13 +1,13 @@
+// Hooks
 import React, { useEffect, useState } from 'react';
-import Slider from 'react-slick';
+import useProductQuantity from '../../../hooks/useProductQuantity';
+
+// CSS
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import '../assets/styles/components/Model.css';
-import useProductQuantity from '../hooks/useProductQuantity';
+import './ProductModal.css';
 
-// 필요한 경우 다른 스타일이나 스크립트도 import 해주세요.
-
-function Modal({ isOpen, onClose, product }) {
+const ProductModal = ({ isOpen, onClose, product }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isZoomed, setIsZoomed] = useState(false); // 확대 보기 상태
   const { quantity, increaseQuantity, decreaseQuantity } =
@@ -210,6 +210,6 @@ function Modal({ isOpen, onClose, product }) {
       </div>
     </div>
   );
-}
+};
 
-export default Modal;
+export default ProductModal;

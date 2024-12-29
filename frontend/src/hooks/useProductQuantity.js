@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function useProductQuantity(initialValue = 1) {
+const useProductQuantity = (initialValue = 1) => {
   const [quantity, setQuantity] = useState(initialValue);
 
   const increaseQuantity = () => {
@@ -14,6 +14,6 @@ function useProductQuantity(initialValue = 1) {
   };
 
   return { quantity, increaseQuantity, decreaseQuantity };
-}
+};
 
 export default useProductQuantity;

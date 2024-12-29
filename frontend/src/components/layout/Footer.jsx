@@ -1,9 +1,10 @@
+// Hooks
 import { Link } from 'react-router-dom';
 
-// import CSS
+// CSS
 import './Footer.css';
 
-export default function Footer() {
+const Footer = () => {
   return (
     <footer className="bg3 p-t-50 p-b-32">
       <div className="container">
@@ -227,4 +228,6 @@ export default function Footer() {
       </div>
     </footer>
   );
-}
+};
+
+export default Footer;

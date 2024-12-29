@@ -1,8 +1,7 @@
+// Hooks
 import { Link } from 'react-router-dom';
-// import CSS
-import '../../assets/styles/components/footer.css';
 
-export default function Privacy() {
+const PrivacyPolicy = () => {
   return (
     <>
       <h3 className="privacy-subtitle">개인정보처리방침</h3>
@@ -613,4 +612,6 @@ export default function Privacy() {
       </div>
     </>
   );
-}
+};
+
+export default PrivacyPolicy;

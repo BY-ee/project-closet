@@ -1,16 +1,18 @@
+// Hooks
 import React, { useEffect, useState } from 'react';
 
-/** custom css 및 react icon */
+// Images
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import LockIcon from '@mui/icons-material/Lock';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import '../../assets/styles/detailItem/ReviewInput.css';
 
-/** api */
-import FetchIdProduct from '../../api/item/FetchIdProduct';
-import { call } from '../../api/auth/ApiService';
+// CSS
+import '../../../assets/styles/review/review.css';
 
-function ItemInquiry({ activeTab, userId, productId }) {
+// Components
+import { call } from '../../../api/auth/ApiService';
+
+const ProductInquiries = ({ activeTab, userId, productId }) => {
   /** 리뷰, 드롭다운 상태, 폼 입력 상태를 관리하기 위한 state */
   const [inquiries, setInquiries] = useState([]); // 문의 목록
   const [dropdownStates, setDropdownStates] = useState({}); // 드롭다운 상태
@@ -380,6 +382,6 @@ function ItemInquiry({ activeTab, userId, productId }) {
       )}
     </>
   );
-}
+};
 
-export default ItemInquiry;
+export default ProductInquiries;

@@ -1,12 +1,17 @@
+// Hooks
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // React Router의 useNavigate 가져오기
-import Pagination from './Pagination'; // 페이지네이션 컴포넌트
-import { call } from '../../api/auth/ApiService';
-import '../../assets/styles/myPage/MyPage.css';
-import '../../assets/styles/detailItem/ReviewInput.css';
 
-/** Material-UI Icons */
+// Images
 import LockIcon from '@mui/icons-material/Lock';
+
+// CSS
+import '../../../assets/styles/mypage/mypage.css';
+import '../../../assets/styles/review/review.css';
+
+// Components
+import Pagination from '../../../components/common/Pagination';
+import { call } from '../../../api/auth/ApiService';
 
 const MyReviews = () => {
   const [reviews, setReviews] = useState([]); // 리뷰 데이터를 저장

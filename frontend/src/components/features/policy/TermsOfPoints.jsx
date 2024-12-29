@@ -1,4 +1,4 @@
-export default function GiftcardAgreement() {
+const TermsOfPoints = () => {
   return (
     <>
       {/* Section 1 */}
@@ -306,4 +306,6 @@ export default function GiftcardAgreement() {
       </section>
     </>
   );
-}
+};
+
+export default TermsOfPoints;

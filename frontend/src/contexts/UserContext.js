@@ -1,4 +1,7 @@
+// Hooks
 import React, { createContext, useContext, useState, useEffect } from 'react';
+
+// Components
 import { me, signin } from '../api/auth/ApiService';
 
 const UserContext = createContext(null);

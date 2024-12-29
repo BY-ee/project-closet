@@ -1,52 +1,56 @@
-// React 기본 및 라우팅 관련 라이브러리
+// Hooks
 import React from 'react';
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom'; // 라우트 관련 훅
 
-// 외부 CSS 및 아이콘 라이브러리
-import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstrap 스타일
-import 'font-awesome/css/font-awesome.min.css'; // Font Awesome 아이콘
-import 'material-design-iconic-font/dist/css/material-design-iconic-font.min.css'; // Material Design 아이콘
+// CSS
+import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstrap CSS
+import 'font-awesome/css/font-awesome.min.css'; // FontAwesome CSS
+import 'material-design-iconic-font/dist/css/material-design-iconic-font.min.css'; // Material Design CSS
 
-// 전역 상태
+// Context API Components
 import { BasketProvider } from './contexts/BasketContext';
 import { UserProvider } from './contexts/UserContext';
 
-// 공통 애니메이션과 레이아웃
-import scrollToTop from './utils/scrollToTop';
-import animation from './utils/animation'; // 페이지 전환 애니메이션 효과
+// Utility Components
+import Animation from './components/utils/Animation';
+import ScrollToTop from './components/utils/ScrollToTop';
 
-// 컴포넌트
+// Page Components / Routes Components
 import Home from './pages/Home';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 
+import GuidesOfService from './components/features/policy/GuidesOfService';
+import TermsSwitcher from './components/features/policy/TermsSwitcher';
+import PrivacyPolicy from './components/features/policy/PrivacyPolicy';
+
 import Auth from './pages/auth/Auth';
 import Mypage from './pages/mypage/Mypage';
 
-import Shop from './pages/shop/Shop';
+import ProductList from './pages/product/ProductList';
 import ProductDetail from './pages/product/ProductDetail';
 import CheckoutPage from './pages/checkout/CheckoutPage';
-import ImageComponent from './pages/cart/ImageComponent';
+import ImageComponent from './pages/checkout/ImageComponent';
 
 import Board from './pages/board/Board';
 import Coordi from './pages/coordi/Coordi';
 import Styling from './pages/styling/Styling';
 
 import Admin from './pages/admin/Admin';
-import Page404 from './components/main/Page404';
+import NotFound from './pages/error/NotFound';
 
 /**
- * App 전체 라우팅을 관리하는 컴포넌트
+ * App 전체 라우팅을 관리하는 컴포넌트입니다.
  * @returns {JSX.Element} - 전체 라우팅 구성
  */
 function App() {
   return (
     <UserProvider>
       <BasketProvider>
-        <animation>
-          <Router>
+        <Animation>
+          <BrowserRouter>
             <Header />
-            <scrollToTop />
+            <ScrollToTop />
             <Routes>
               {/* -------------------------------------------------------------------------- */}
               {/* 메인 페이지 */}
@@ -64,12 +68,12 @@ function App() {
               <Route path="/mypage/*" element={<Mypage />} />
               {/* -------------------------------------------------------------------------- */}
               {/* 상품 페이지  */}
-              <Route path="/products" element={<Shop />} />
+              <Route path="/products" element={<ProductList />} />
               {/* 상품 상세 페이지 */}
               <Route path="/products/:productId" element={<ProductDetail />} />
               {/* 추천 페이지 */}
               <Route path="/styling" element={<Styling />} />
-              {/* 장바구니 페이지 */}
+              {/* 상품구매 페이지 */}
               <Route path="/checkout" element={<CheckoutPage />} />
               {/* -------------------------------------------------------------------------- */}
               {/* 커뮤니티 페이지 */}
@@ -82,11 +86,11 @@ function App() {
               {/* 에러 페이지 */}
               <Route path="/ImageComponent" element={<ImageComponent />} />
               {/* 에러 페이지 */}
-              <Route path="/*" element={<Page404 />} />
+              <Route path="/*" element={<NotFound />} />
             </Routes>
             <Footer />
-          </Router>
-        </animation>
+          </BrowserRouter>
+        </Animation>
       </BasketProvider>
     </UserProvider>
   );

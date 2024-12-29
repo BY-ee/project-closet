@@ -34,7 +34,7 @@ public class SecurityConfig {
             .csrf(AbstractHttpConfigurer::disable)  // CSRF비활성화(JWT 사용시 필요없음)
             .cors(cors -> cors.configurationSource(request -> {
                 CorsConfiguration configuration = new CorsConfiguration();
-                configuration.addAllowedOrigin("http://13.209.5.239"); // React 개발 서버 URL
+                configuration.addAllowedOrigin("http://localhost:3000"); // React 개발 서버 URL
                 configuration.addAllowedMethod("*"); // 모든 HTTP 메서드 허용
                 configuration.addAllowedHeader("*"); // 모든 헤더 허용
                 configuration.setAllowCredentials(true); // 인증 정보(Cookie, Authorization 헤더) 허용

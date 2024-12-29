@@ -1,26 +1,30 @@
+// Hooks
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-// import CSS
+import useFixedHeader from '../../hooks/useFixedHeader';
+import { useUser } from '../../contexts/UserContext';
+
+// CSS
 import './Header.css';
 import '../../assets/vendor/css-hamburgers/hamburgers.min.css';
 
-// import Image
-import closetImage from '../../assets/closet-removebg.png';
-import CartModal from '../cart/CartModal';
-import Search from '../../api/main/Search';
+// Images
+import closetImage from '../../assets/images/closet_logo.png';
 
-// import Hooks
-import useFixedHeader from '../../hooks/useFixedHeader';
-import MobileMenu from '../main/MobileMenu';
-import isValidJwtToken from '../../api/auth/isValidJwtToken';
+// Utility functions
+import isValidJwtToken from '../../utils/isValidJwtToken';
+
+// Components
+import { call } from '../../api/auth/ApiService';
+import SearchProducts from '../../api/search/SearchProducts';
+import CartModal from '../features/cart/CartModal';
+import MobileMenuModal from '../features/home/MobileMenuModal';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Slider from 'react-slick';
-import { call } from '../../api/auth/ApiService';
-import Alarm from '../main/Alarm';
-import { useUser } from '../../contexts/UserContext';
-import NoticeModal from '../../pages/main/NoticeModal';
+import AlarmModal from '../common/AlarmModal';
+import NoticeModal from '../../components/features/home/NoticeModal';
 
-function Header({ user }) {
+const Header = ({ user }) => {
   const navigate = useNavigate();
   const isAtTop = useFixedHeader(); // 현재 페이지 스크롤의 최상단 여부
   const [isAuthenticated, setIsAuthenticated] = useState(false); // 토큰 유효성 상태
@@ -168,7 +172,7 @@ function Header({ user }) {
             <i className="zmdi zmdi-search"></i>
           </div>
 
-          <Alarm />
+          <AlarmModal />
 
           <div
             className="icon-header-item cl2 hov-cl1 trans-04 p-r-12 p-l-20 icon-header-noti-mobile js-show-cart"
@@ -207,7 +211,7 @@ function Header({ user }) {
       )}
 
       {/* 모바일 메뉴 */}
-      <MobileMenu
+      <MobileMenuModal
         isMenuOpen={isMenuOpen}
         setIsMenuOpen={setIsMenuOpen}
         isLoggedIn={isLoggedIn}
@@ -374,7 +378,7 @@ function Header({ user }) {
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
                     console.log(`${e.key} 입력 (검색)`);
-                    <Search inputValue={inputValue} />;
+                    <SearchProducts inputValue={inputValue} />;
                   }
                 }}
                 value={inputValue}
@@ -386,7 +390,7 @@ function Header({ user }) {
                 ></i>
               </div>
 
-              <Alarm />
+              <AlarmModal />
 
               <div
                 className="icon-header-item cl2 hov-cl1 trans-04 p-l-20 p-r-12 icon-header-noti"
@@ -421,6 +425,6 @@ function Header({ user }) {
       </div>
     </header>
   );
-}
+};
 
 export default Header;

@@ -1,24 +1,27 @@
+// Hooks
 import React, { useState, useEffect } from 'react';
-import PriceDisplay from '../../hooks/PriceDisplay';
+import { useUser } from '../../contexts/UserContext'; // 사용자 정보를 가져오는 Hook
+import { useCart } from '../../contexts/BasketContext'; // 장바구니 관련 상태 관리
+
+// Images
 import ClearIcon from '@mui/icons-material/Clear';
 
-// CSS Imports
-import '../../assets/styles/components/main.css';
-import '../../assets/styles/components/util.css';
+// CSS
+import '../../assets/styles/common/main.css';
+import '../../assets/styles/common/util.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import 'font-awesome/css/font-awesome.min.css';
 import 'material-design-iconic-font/dist/css/material-design-iconic-font.min.css';
 import './CheckoutPage.css';
 
-// Hook Imports
-import { useUser } from '../../contexts/UserContext'; // 사용자 정보를 가져오는 Hook
-import { useCart } from '../../contexts/BasketContext'; // 장바구니 관련 상태 관리
-import { call } from '../../api/auth/ApiService';
-import paymentResult from './paymentResult';
+// Utility functions
 import formatToKRW from '../../utils/formatToKRW';
 
-function ShoppingCart() {
+// Components
+import { call } from '../../api/auth/ApiService';
+
+const CheckoutPage = () => {
   const { user } = useUser(); // 사용자 정보 로드
   const { baskets, fetchBaskets, removeFromCart } = useCart(); // 장바구니 데이터 관리 및 삭제 함수
   const [quantities, setQuantities] = useState({}); // 각 제품의 수량 관리
@@ -149,10 +152,10 @@ function ShoppingCart() {
         totalPayAmount: finalPrice,
         taxScopeAmount: finalPrice,
         taxExScopeAmount: '0',
-        returnUrl: 'http://13.209.5.239/payment/result',
+        returnUrl: 'http://localhost:8090/payment/result',
       });
 
-      paymentResult();
+      // paymentResult();
     } else {
       console.error('Naver Pay SDK is not loaded.');
     }
@@ -242,7 +245,7 @@ function ShoppingCart() {
               aria-hidden="true"
             ></i>
           </a>
-          <span className="stext-109 cl4">Shopping Cart</span>
+          <span className="stext-109 cl4">장바구니</span>
         </div>
 
         <div className="row">
@@ -328,11 +331,7 @@ function ShoppingCart() {
                             </div>
                           </td>
                           <td className="column-5">
-                            {new Intl.NumberFormat('ko-KR', {
-                              style: 'currency',
-                              currency: 'KRW',
-                              maximumFractionDigits: 0,
-                            }).format(
+                            {formatToKRW(
                               (quantities[item.basketId] || item.itemCount) *
                                 item.itemPrice
                             )}
@@ -370,23 +369,16 @@ function ShoppingCart() {
                 </div>
                 <div className="size-209">
                   <span className="mtext-110 cl2">
-                    {new Intl.NumberFormat('ko-KR', {
-                      style: 'currency',
-                      currency: 'KRW',
-                      maximumFractionDigits: 0,
-                    }).format(calculateSubtotal())}
+                    {formatToKRW(calculateSubtotal())}
                   </span>
                 </div>
               </div>
 
               <div>
-                <p>
-                  사용 가능한 포인트:{' '}
-                  {new Intl.NumberFormat('ko-KR').format(totalPoints)}P
-                </p>
+                <p>사용 가능한 포인트: {formatToKRW(totalPoints)}P</p>
                 <p>
                   최대 사용 가능 포인트 (80%):{' '}
-                  {new Intl.NumberFormat('ko-KR').format(
+                  {formatToKRW(
                     Math.min(Math.floor(calculateSubtotal() * 0.8), totalPoints)
                   )}
                   P
@@ -406,11 +398,7 @@ function ShoppingCart() {
                 </div>
                 <div className="size-209 p-t-1">
                   <span className="mtext-110 cl2">
-                    {new Intl.NumberFormat('ko-KR', {
-                      style: 'currency',
-                      currency: 'KRW',
-                      maximumFractionDigits: 0,
-                    }).format(finalPrice)}
+                    {formatToKRW(finalPrice)}
                   </span>
                 </div>
               </div>
@@ -419,7 +407,7 @@ function ShoppingCart() {
                 className="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer"
                 onClick={handlePayment}
               >
-                Proceed to Checkout
+                주문
               </button>
             </div>
           </div>
@@ -427,6 +415,6 @@ function ShoppingCart() {
       </div>
     </form>
   );
-}
+};
 
-export default ShoppingCart;
+export default CheckoutPage;

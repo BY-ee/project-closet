@@ -1,4 +1,4 @@
-export default function ServiceAgreement() {
+const TermsOfService = () => {
   return (
     <>
       {/* Section 1 */}
@@ -626,4 +626,6 @@ export default function ServiceAgreement() {
       </section>
     </>
   );
-}
+};
+
+export default TermsOfService;
