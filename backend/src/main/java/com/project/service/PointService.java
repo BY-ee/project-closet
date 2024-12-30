@@ -55,8 +55,8 @@ public class PointService {
 
     private final UserRepository userRepository;
 
-    public Page<PointDTO> findPointDTOsByUserId(long userId, Pageable pageable) {
-        return pointRepository.findByUserId(userId, pageable);
+    public Page<PointDTO> findPointListByUserId(long userId, Pageable pageable) {
+        return pointRepository.findPointListByUserId(userId, pageable);
     }
 
     public int getTotalPointByUserId(long userId) {

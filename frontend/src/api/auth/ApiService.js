@@ -50,26 +50,6 @@ export const call = async (api, method = 'GET', request = null) => {
   }
 };
 
-/**
- * 로그인 API 호출 함수입니다.
- *
- * @param {Object} userDTO - 로그인을 시도할 유저의 데이터 객체를 입력합니다.
- * @returns {Promise<UserDTO>} 로그인 성공 시 UserDTO 객체가 반환됩니다.
- */
-export const signin = async (userDTO) => {
-  try {
-    const response = await call('/auth/signin', 'POST', userDTO);
-    localStorage.setItem('token', response.token); // 토큰을 로컬 저장소에 저장
-    alert('로그인에 성공했습니다!'); // 성공 팝업 표시
-
-    return response; // 필요 시 응답 데이터 반환
-  } catch (error) {
-    console.error('로그인 실패:', error);
-    alert('로그인에 실패했습니다. 아이디와 비밀번호를 확인해주세요.'); // 실패 팝업 표시
-    throw error;
-  }
-};
-
 export const signup = async (data) => {
   try {
     const response = await call('/auth/signup', 'POST', JSON.stringify(data));
@@ -91,36 +71,14 @@ export const signup = async (data) => {
   }
 };
 
-/**
- * ~~사용자 정보를 가져오는 함수입니다.~~
- *
- * ~~@returns {Promise<CustomUserDetail>} 현재 로그인된 사용자의 데이터를 포함한 객체입니다.~~
- *
- * ~~반환 객체 구조:~~
- * ~~- `user`: `Users` 사용자 객체~~
- */
-export const me = async () => {
+// 로그아웃
+export const logout = async () => {
   try {
-    // 로컬 스토리지에서 토큰 가져오기
-    const token = localStorage.getItem('token');
-    if (!token) {
-      // throw new Error('Authentication token not found.');
-    }
+    localStorage.removeItem('token');
 
-    const response = await call(`/auth/me`);
-
-    if (!response.ok) {
-      // throw new Error(
-      //   response || `Error: ${response.status} - ${response.statusText}`
-      // );
-    }
-
-    console.log(`[id: ${response.id}]`);
-    console.log(`[username: ${response.username}]로 로그인 중`);
-    return response; // 사용자 데이터 반환
-  } catch (err) {
-    console.error('Failed to fetch user data:', err);
-    return null; // 에러 발생 시 null 반환
+    alert('정상적으로 로그아웃되었습니다.');
+  } catch (error) {
+    console.error('로그아웃 예외가 발생했습니다:', error);
   }
 };
 
@@ -139,7 +97,7 @@ export const sendCode = async (email) => {
     }
 
     // 중복이 없을 경우 인증 코드 전송
-    const response = await call(`/email/sendCode`, 'POST', { email });
+    const response = await call(`/email/code`, 'POST', { email });
     return response; // 성공 메시지 반환
   } catch (error) {
     console.error('인증 코드 전송 실패:', error);
@@ -156,7 +114,7 @@ export const sendCode = async (email) => {
  */
 export const verifyCode = async (email, code) => {
   try {
-    const response = await call(`/email/verifyCode`, 'POST', {
+    const response = await call(`/email/code/verify`, 'POST', {
       email,
       code,
     });

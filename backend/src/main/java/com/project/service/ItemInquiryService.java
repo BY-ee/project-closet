@@ -19,8 +19,13 @@ public class ItemInquiryService {
     private final UserRepository userRepository;
     private final ItemRepository itemRepository;
 
-    public List<UserItemInquiryDTO> findAll(Long itemId){return itemInquiryRepository.findByUserId(itemId);}
-    public Long countInquiriesByItemId(Long itemId) {return itemInquiryRepository.countInquiriesByItemId(itemId);}
+    public List<UserItemInquiryDTO> findAllByProductId(Long productId) {
+        return itemInquiryRepository.findAllByProductId(productId);
+    }
+
+    public Long countInquiriesByItemId(Long itemId) {
+        return itemInquiryRepository.countInquiriesByItemId(itemId);
+    }
 
     public void saveInquiry(ItemInquiryDTO ItemInquiryDTO) {
 
@@ -44,7 +49,7 @@ public class ItemInquiryService {
         itemInquiryRepository.save(inquiry);
     }
 
-    public void deactivateInquiry(Long inquiryId) {
+    public void inactivateInquiry(Long inquiryId) {
         ItemInquiry inquiry = itemInquiryRepository.findById(inquiryId)
                 .orElseThrow(() -> new IllegalStateException("Review not found"));
 

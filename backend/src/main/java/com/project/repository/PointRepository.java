@@ -20,7 +20,7 @@ public interface PointRepository  extends JpaRepository<Point, Long> {
             "JOIN p.user u " +
             "WHERE p.user.id = :userId " +
             "ORDER BY p.createdAt DESC")
-    Page<PointDTO> findByUserId(long userId, Pageable pageable);
+    Page<PointDTO> findPointListByUserId(long userId, Pageable pageable);
 
     /** 이전 쿼리문과 기능은 같으나 가독성을 향상시킴 */
     @Query("""

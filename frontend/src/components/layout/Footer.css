@@ -164,7 +164,7 @@ footer .footer-links a:hover {
 }
 
 /* 이용약관 스타일 */
-.agreement-subtitle {
+.terms-subtitle {
   padding-top: 120px;
   padding-bottom: 30px;
   margin-bottom: 30px;
@@ -172,56 +172,56 @@ footer .footer-links a:hover {
   color: #000;
 }
 
-.agreement-link {
+.terms-link {
   font-size: 17px;
   line-height: 2;
   border-right: 1px solid #ddd;
 }
 
-.agreement-link a {
+.terms-link a {
   color: #888;
 }
 
-.agreement-link .active-link {
+.terms-link .active-link {
   color: #444;
   border-bottom: 2px solid #000;
 }
 
-.agreement-link a:hover {
+.terms-link a:hover {
   color: #444;
 }
 
-.agreement-content {
+.terms-content {
   font-size: 17px;
   line-height: 2;
 }
 
-.agreement-box {
+.terms-box {
   padding-bottom: 30px;
   margin-bottom: 30px;
 }
 
-.agreement-box h4 {
+.terms-box h4 {
   margin-bottom: 10px;
 }
 
-.agreement-box ul {
+.terms-box ul {
   padding-left: 0;
   margin-left: 30px;
   margin-top: 5px;
   margin-bottom: 5px;
 }
 
-.agreement-box li {
+.terms-box li {
   list-style-type: square;
 }
 
-.agreement-box h5 {
+.terms-box h5 {
   margin-bottom: 20px;
   color: #000;
 }
 
-.agreement-box p {
+.terms-box p {
   font-size: 15px;
   color: #888;
   line-height: 1.8;

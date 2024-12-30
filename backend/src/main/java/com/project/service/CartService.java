@@ -14,7 +14,7 @@ import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
-public class BasketService {
+public class CartService {
     private final BasketRepository basketRepository;
     private final UserRepository userRepository;
     private final ItemRepository itemRepository;

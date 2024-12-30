@@ -47,7 +47,7 @@ const ReservationModal = ({ isOpen, setIsOpen, coordiId, user }) => {
 
     // 서버에 예약 데이터 전송
     try {
-      const data = await call(`/book/coordi`, 'POST', reservation);
+      const data = await call(`/styling`, 'POST', reservation);
       console.log('서버 반환 데이터:', data);
 
       alert(data.message);

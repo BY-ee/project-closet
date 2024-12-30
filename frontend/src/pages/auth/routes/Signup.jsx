@@ -1,9 +1,9 @@
 // Hooks
 import React, { useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 // CSS
-import './SignUp.css';
+import './Signup.css';
 
 // Images
 import ClosetImage from '../../../assets/images/closet_logo.png'; // 이미지 경로를 import
@@ -18,7 +18,7 @@ import {
   signup,
 } from '../../../api/auth/ApiService';
 
-const SignUp = () => {
+const Signup = () => {
   const formRef = useRef(null); // 폼 참조
   const navigate = useNavigate(); // 페이지 네비게이션 훅
 
@@ -425,10 +425,10 @@ const SignUp = () => {
         <p className="mb-1">&copy; 2024 CLOSET</p>
         <ul className="list-inline">
           <li className="list-inline-item">
-            <a href="/privacy">개인정보처리방침</a>
+            <Link to="/terms">이용약관</Link>
           </li>
           <li className="list-inline-item">
-            <a href="/guide">이용약관</a>
+            <Link to="/privacy">개인정보처리방침</Link>
           </li>
           <li className="list-inline-item">
             <a href="#">고객센터</a>
@@ -439,4 +439,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Signup;

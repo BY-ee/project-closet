@@ -17,7 +17,7 @@ public class EmailController {
     private final EmailService emailService;
 
     // 인증 코드 전송
-    @PostMapping("/sendCode")
+    @PostMapping("/code")
     public ResponseEntity<Map<String, String>> sendCode(@RequestBody Map<String, String> request, HttpSession session) {
         String email = request.get("email");
         if (email == null || email.isEmpty()) {
@@ -37,7 +37,7 @@ public class EmailController {
 
 
     // 인증 코드 검증
-    @PostMapping("/verifyCode")
+    @PostMapping("/code/verify")
     public ResponseEntity<Map<String, String>> verifyCode(@RequestBody Map<String, String> request, HttpSession session) {
         String email = request.get("email");
         String code = request.get("code");

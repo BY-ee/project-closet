@@ -216,7 +216,7 @@ const Footer = () => {
             <Link to="/guide">이용안내</Link>
           </li>
           <li>
-            <Link to="/agreement">이용약관</Link>
+            <Link to="/terms">이용약관</Link>
           </li>
           <li>
             <Link to="/privacy">개인정보처리방침</Link>

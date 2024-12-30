@@ -11,25 +11,25 @@ export const useCart = () => useContext(BasketContext);
 export const BasketProvider = ({ children }) => {
   const [baskets, setBaskets] = useState([]);
 
-  const fetchBaskets = useCallback(async (userId) => {
+  const fetchBaskets = useCallback(async () => {
     try {
-      const response = await call(`/basket/getBasket/${userId}`);
+      const response = await call(`/cart`);
       if (!response.ok) {
-        // throw new Error('Failed to fetch baskets');
+        // throw new Error('Failed to fetch carts');
       }
       setBaskets(response); // 상태 업데이트
     } catch (error) {
-      console.error('Error fetching baskets:', error);
+      console.error('Error fetching carts:', error);
     }
   }, []);
 
-  const removeFromCart = useCallback(async (basketId) => {
+  const removeFromCart = useCallback(async (cartId) => {
     try {
-      const response = await call(`/basket/remove/${basketId}`, 'DELETE');
+      const response = await call(`/cart/${cartId}`, 'DELETE');
       if (!response.ok) {
         // throw new Error('Failed to remove item');
       }
-      setBaskets((prev) => prev.filter((item) => item.basketId !== basketId));
+      setBaskets((prev) => prev.filter((item) => item.cartId !== cartId));
     } catch (error) {
       console.error('Error removing item from cart:', error);
     }

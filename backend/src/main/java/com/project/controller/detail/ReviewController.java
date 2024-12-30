@@ -4,23 +4,28 @@ import com.project.dto.ReviewDTO;
 import com.project.dto.UserItemReviewDTO;
 import com.project.service.ReviewService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api")
-@RequiredArgsConstructor // 생성자
+@RequestMapping("/api/reviews")
+@RequiredArgsConstructor
+@Slf4j
 public class ReviewController {
-
     private final ReviewService reviewService;
 
-    @PostMapping("/saveReview")
+    @GetMapping("/products/{productId}")
+    public List<UserItemReviewDTO> findReview(@PathVariable("productId") Long productId) {
+        return reviewService.findAllReviews(productId);
+    }
+
+    @PostMapping
     public ResponseEntity<Map<String, String>> saveReview(@RequestBody ReviewDTO review) {
         Map<String, String> response = new HashMap<>();
         try {
@@ -36,29 +41,24 @@ public class ReviewController {
         }
     }
 
-    @GetMapping("/findAllReview/{itemId}")
-    public List<UserItemReviewDTO> findReview(@PathVariable("itemId") Long itemId) {
-        return reviewService.findAllReviews(itemId);
-    }
-
     @GetMapping("/countReview/{itemId}")
     public Long countReview(@PathVariable("itemId") Long itemId) {return reviewService.getReviewCountByItemId(itemId);}
 
-    @PutMapping("/updateReview/{reviewId}")
-    public ResponseEntity<String> updateReview(@PathVariable Long reviewId, @RequestBody ReviewDTO reviewDTO) {
-        reviewService.updateReview(reviewId, reviewDTO);
+    @PutMapping("/{id}")
+    public ResponseEntity<String> updateReview(@PathVariable Long id, @RequestBody ReviewDTO reviewDTO) {
+        reviewService.updateReview(id, reviewDTO);
         return ResponseEntity.ok("Review updated successfully");
     }
 
-    @PatchMapping("/deactivateReview/{reviewId}")
-    public ResponseEntity<String> deactivateReview(@PathVariable Long reviewId) {
-        reviewService.deactivateReview(reviewId);
+    @PatchMapping("/{id}/inactivation")
+    public ResponseEntity<String> inactivateReview(@PathVariable Long id) {
+        reviewService.inactivateReview(id);
         return ResponseEntity.ok("리뷰 비활성화가 완료 되었습니다");
     }
 
-    @PatchMapping("/activateReview/{reviewId}")
-    public ResponseEntity<String> activateReview(@PathVariable Long reviewId) {
-        reviewService.activateReview(reviewId);
+    @PatchMapping("/{id}/activation")
+    public ResponseEntity<String> activateReview(@PathVariable Long id) {
+        reviewService.activateReview(id);
         return ResponseEntity.ok("리뷰 활성화가 완료 되었습니다");
     }
 

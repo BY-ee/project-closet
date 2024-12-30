@@ -4,7 +4,7 @@ import { Route } from 'react-router-dom';
 // Components
 import OAuth2RedirectHandler from '../../components/features/auth/OAuth2RedirectHandler';
 import Login from './routes/Login';
-import SignUp from './routes/SignUp';
+import Signup from './routes/Signup';
 import FindId from './routes/FindId';
 import ResetPassword from './routes/ResetPassword';
 import ChangePassword from './routes/ChangePassword';
@@ -14,9 +14,9 @@ import ChangePassword from './routes/ChangePassword';
  *  각 경로는 인증 페이지의 특정 기능입니다.
  */
 const authRoutes = [
-  <Route path="/Login" element={<Login />} key="login" />,
-  <Route path="/SignUp" element={<SignUp />} key="signUp" />,
-  <Route path="find-id" element={<FindId />} key="findId" />,
+  <Route path="/login" element={<Login />} key="login" />,
+  <Route path="/signup" element={<Signup />} key="signup" />,
+  <Route path="/find-id" element={<FindId />} key="findId" />,
   <Route
     path="/reset-password"
     element={<ResetPassword />}

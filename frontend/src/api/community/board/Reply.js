@@ -3,17 +3,17 @@ import { call } from '../../auth/ApiService';
 
 // 댓글 조회
 export const getRepliesByBoardId = async (boardId) => {
-  return await call(`/replies/board/${boardId}`);
+  return await call(`/board/${boardId}/comments`);
 };
 
 // 댓글 등록
 export const addReply = async (replyData) => {
-  return await call('/replies', 'POST', JSON.stringify(replyData));
+  return await call('/board/${boardId}/comments', 'POST', replyData);
 };
 
 // 댓글 삭제
 export const deleteReply = async (replyId) => {
-  const data = await call(`/replies/${replyId}`, 'DELETE');
+  const data = await call('/board/${boardId}/comments/${replyId}', 'DELETE');
 
   // JSON 또는 텍스트에 맞춰 메시지를 반환
   if (typeof data === 'string') {
@@ -24,5 +24,9 @@ export const deleteReply = async (replyId) => {
 
 // 댓글 수정
 export const updateReply = async (replyId, updatedData) => {
-  return await call(`/replies/${replyId}`, 'PUT', JSON.stringify(updatedData));
+  return await call(
+    '/board/${boardId}/comments/${replyId}',
+    'PUT',
+    updatedData
+  );
 };

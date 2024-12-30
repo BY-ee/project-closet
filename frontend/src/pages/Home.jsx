@@ -32,7 +32,7 @@ const Home = () => {
 
   // 페이지 로드 시 GET 요청으로 상품 데이터를 받아옵니다.
   useEffect(() => {
-    call('/itemAll')
+    call('/products')
       .then((res) => {
         console.log('홈페이지 상품 데이터: ' + res);
         setProducts(res);

@@ -22,7 +22,7 @@ const TermsSwitcher = () => {
   return (
     <>
       <div
-        className="d-flex agreement-subtitle m-t-50 fs-16"
+        className="d-flex terms-subtitle m-t-50 fs-16"
         style={{ justifyContent: 'center' }}
       >
         <button
@@ -42,10 +42,10 @@ const TermsSwitcher = () => {
       <div className="container">
         <div className="row">
           <div
-            className="col-8 pt-3 ps-5 agreement-content"
+            className="col-8 pt-3 ps-5 terms-content"
             style={{ margin: '0 auto' }}
           >
-            <div className="agreement-box">
+            <div className="terms-box">
               {service ? (
                 <TermsOfService />
               ) : points ? (

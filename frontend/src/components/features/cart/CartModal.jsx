@@ -84,7 +84,7 @@ const CartModal = ({ isCartOpen, setIsCartOpen }) => {
                   </div>
                   <div className="header-cart-item-txt p-t-8">
                     <Link
-                      to={`/Detail/${item.itemDetailId}`}
+                      to={`/products/${item.itemDetailId}`}
                       className="header-cart-item-name m-b-18 hov-cl1 trans-04"
                       onClick={closeCart}
                     >
@@ -116,16 +116,19 @@ const CartModal = ({ isCartOpen, setIsCartOpen }) => {
           </ul>
 
           <div className="w-full">
-            <div className="header-cart-total w-full p-tb-40">
+            <div className="header-cart-total w-full p-tb-40 text-center">
               Total: {totalAmount.toLocaleString()} 원
             </div>
-            <div className="header-cart-buttons flex-w w-full">
+            <div
+              className="header-cart-buttons flex-w w-full"
+              style={{ justifyContent: 'center' }}
+            >
               <Link
-                to="/ShoppingCart"
+                to="/checkout"
                 className="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10"
                 onClick={closeCart}
               >
-                장바구니 이동
+                주문하기
               </Link>
             </div>
           </div>

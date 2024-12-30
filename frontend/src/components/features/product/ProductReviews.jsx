@@ -27,7 +27,7 @@ const ProductReviews = ({ activeTab, userId, productId }) => {
   /** 특정 상품에 대한 리뷰 데이터를 가져오는 함수 */
   const fetchReviews = async () => {
     try {
-      const response = await call(`/findAllReview/${productId}`);
+      const response = await call(`/reviews/products/${productId}`);
       setReviews(response);
       console.log('리뷰 데이터를 성공적으로 불러왔습니다.');
       console.log(response);
@@ -77,7 +77,7 @@ const ProductReviews = ({ activeTab, userId, productId }) => {
     try {
       const updatedData = { reviewContent: updatedContent };
       const response = await call(
-        `/updateReview/${reviewId}`,
+        `/${reviewId}`,
         'PUT',
         JSON.stringify(updatedData)
       );
@@ -92,9 +92,9 @@ const ProductReviews = ({ activeTab, userId, productId }) => {
   };
 
   /** 리뷰 비활성화 핸들러 */
-  const handleDeactivate = async (reviewId) => {
+  const handleInactivate = async (reviewId) => {
     try {
-      const response = await call(`/deactivateReview/${reviewId}`, 'PATCH');
+      const response = await call(`/${reviewId}/inactivation`, 'PATCH');
 
       // if (!response.ok) throw new Error('리뷰 비활성화 실패');
       alert('리뷰가 성공적으로 비활성화되었습니다.');
@@ -108,7 +108,7 @@ const ProductReviews = ({ activeTab, userId, productId }) => {
   /** 리뷰 활성화 핸들러 */
   const handleActivate = async (reviewId) => {
     try {
-      const response = await call(`/activateReview/${reviewId}`, 'PATCH');
+      const response = await call(`/${reviewId}/activation`, 'PATCH');
 
       // if (!response.ok) throw new Error('리뷰 활성화 실패');
       alert('리뷰가 성공적으로 활성화되었습니다.');
@@ -138,11 +138,7 @@ const ProductReviews = ({ activeTab, userId, productId }) => {
       };
 
       /** 리뷰 저장 API */
-      const response = await call(
-        '/saveReview',
-        'POST',
-        JSON.stringify(reviewData)
-      );
+      const response = await call('/reviews', 'POST', reviewData);
 
       if (!response.ok) {
         alert(response.message || '리뷰 저장 실패');
@@ -174,11 +170,7 @@ const ProductReviews = ({ activeTab, userId, productId }) => {
   /** 포인트 저장 함수 */
   async function savePoint(PointData) {
     try {
-      const response = await call(
-        `/point/saveReviewPoint`,
-        'POST',
-        JSON.stringify(PointData)
-      );
+      const response = await call(`/point`, 'POST', JSON.stringify(PointData));
       console.log(response);
 
       if (!response.ok) {
@@ -276,7 +268,7 @@ const ProductReviews = ({ activeTab, userId, productId }) => {
                                         </button>
                                         <button
                                           onClick={() =>
-                                            handleDeactivate(review.id)
+                                            handleInactivate(review.id)
                                           }
                                           className="dropdown-item"
                                         >

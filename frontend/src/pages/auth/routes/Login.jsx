@@ -1,7 +1,6 @@
 // Hooks
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useUser } from '../../../contexts/UserContext';
 
 // CSS
 import '../../../assets/styles/auth/auth.css';
@@ -10,6 +9,7 @@ import '../../../assets/styles/auth/auth.css';
 import closetImage from '../../../assets/images/closet_logo.png';
 import NaverImage from '../../../assets/images/naver_login_button.png';
 import KaKaoImage from '../../../assets/images/kakao_login_button.png';
+import { call } from '../../../api/auth/ApiService';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -17,12 +17,11 @@ const Login = () => {
   const [errorMessage, setErrorMessage] = useState(''); // 에러 메시지 상태
   const [loading, setLoading] = useState(false); // 로딩 상태
   const [theme, setTheme] = useState('auto'); // 테마 토글 기본값
-  const { login } = useUser();
   const navigator = useNavigate();
 
   // 회원가입 페이지로 이동
-  const goToSignUp = () => {
-    navigator('/SignUp');
+  const goToSignup = () => {
+    navigator('/signup');
   };
 
   // 테마 변경 함수
@@ -38,7 +37,13 @@ const Login = () => {
 
     // 로그인API 함수 호출
     try {
-      await login({ username, password });
+      const response = await call('/auth/login', 'POST', {
+        username,
+        password,
+      });
+      localStorage.setItem('token', response.token); // 토큰을 로컬 저장소에 저장
+
+      alert('로그인에 성공했습니다!'); // 성공 팝업 표시
       navigator('/'); // 로그인 성공 시 메인홈페이지로 이동
     } catch (error) {
       setErrorMessage(error.message || '로그인에 실패했습니다.');
@@ -133,7 +138,7 @@ const Login = () => {
       </div>
 
       {/* 로그인 폼 */}
-      <main className="form-signin w-100 m-auto">
+      <main className="form-login w-100 m-auto">
         <form noValidate onSubmit={handleSubmit}>
           <img
             className="mb-4"
@@ -231,7 +236,7 @@ const Login = () => {
           </div>
           <div className="text-center mt-2">
             <span>아직 회원이 아니신가요? </span>
-            <a onClick={goToSignUp} className="signup-link" role="button">
+            <a onClick={goToSignup} className="signup-link" role="button">
               회원가입
             </a>
           </div>

@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import useFixedHeader from '../../hooks/useFixedHeader';
-import { useUser } from '../../contexts/UserContext';
 
 // CSS
 import './Header.css';
@@ -15,7 +14,7 @@ import closetImage from '../../assets/images/closet_logo.png';
 import isValidJwtToken from '../../utils/isValidJwtToken';
 
 // Components
-import { call } from '../../api/auth/ApiService';
+import { call, logout } from '../../api/auth/ApiService';
 import SearchProducts from '../../api/search/SearchProducts';
 import CartModal from '../features/cart/CartModal';
 import MobileMenuModal from '../features/home/MobileMenuModal';
@@ -37,7 +36,6 @@ const Header = ({ user }) => {
   const [notices, setNotices] = useState([]); // 공지사항 상태
   const [noticeId, setNoticeId] = useState(null); // 공지사항 id
   const [baskets, setBaskets] = useState([]); // 장바구니 상태
-  const { logout } = useUser();
 
   // 장바구니 데이터 로드
   useEffect(() => {
@@ -268,7 +266,7 @@ const Header = ({ user }) => {
             </div>
             <div className="right-top-bar flex-w h-full">
               <Link
-                to="/MyPageHome"
+                to="/mypage"
                 className="flex-c-m trans-04 p-lr-25"
                 onClick={(e) => {
                   isLoggedIn(e);
@@ -279,14 +277,14 @@ const Header = ({ user }) => {
 
               {user ? (
                 <Link
-                  to="/Logout"
+                  to="/logout"
                   className="flex-c-m trans-04 p-lr-25"
                   onClick={handleLogout}
                 >
                   로그아웃
                 </Link>
               ) : (
-                <Link to="/Login" className="flex-c-m trans-04 p-lr-25">
+                <Link to="/login" className="flex-c-m trans-04 p-lr-25">
                   로그인
                 </Link>
               )}
@@ -327,19 +325,33 @@ const Header = ({ user }) => {
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu>
-                      <Dropdown.Item href="/shop">아우터</Dropdown.Item>
-                      <Dropdown.Item href="/shop">상의</Dropdown.Item>
-                      <Dropdown.Item href="/shop">바지</Dropdown.Item>
-                      <Dropdown.Item href="/shop">치마</Dropdown.Item>
-                      <Dropdown.Item href="/shop">신발</Dropdown.Item>
-                      <Dropdown.Item href="/shop">악세서리</Dropdown.Item>
+                      <Dropdown.Item as={Link} to="/shop">
+                        아우터
+                      </Dropdown.Item>
+                      <Dropdown.Item as={Link} to="/shop">
+                        상의
+                      </Dropdown.Item>
+                      <Dropdown.Item as={Link} to="/shop">
+                        바지
+                      </Dropdown.Item>
+                      <Dropdown.Item as={Link} to="/shop">
+                        치마
+                      </Dropdown.Item>
+                      <Dropdown.Item as={Link} to="/shop">
+                        신발
+                      </Dropdown.Item>
+                      <Dropdown.Item as={Link} to="/shop">
+                        악세서리
+                      </Dropdown.Item>
                       <Dropdown.Divider />
-                      <Dropdown.Item href="/products">전체</Dropdown.Item>
+                      <Dropdown.Item as={Link} to="/products">
+                        전체
+                      </Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>
                 </li>
                 <li>
-                  <Link to="/cart" onClick={isLoggedIn}>
+                  <Link to="/checkout" onClick={isLoggedIn}>
                     장바구니
                   </Link>
                 </li>
@@ -357,10 +369,12 @@ const Header = ({ user }) => {
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu>
-                      <Dropdown.Item href="/community">
+                      <Dropdown.Item as={Link} to="/board">
                         자유게시판
                       </Dropdown.Item>
-                      <Dropdown.Item href="/coordi">코디자랑</Dropdown.Item>
+                      <Dropdown.Item as={Link} to="/coordi">
+                        코디자랑
+                      </Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>
                 </li>

@@ -66,7 +66,7 @@ const ProductInquiries = ({ activeTab, userId, productId }) => {
   /** 상품 문의 목록 API 호출 */
   const fetchInquiries = async () => {
     try {
-      const response = await call(`/inquiry/getInquiries/${productId}`);
+      const response = await call(`/inquiries/products/${productId}`);
       if (!response.ok) {
         // throw new Error(`Error: ${response.statusText}`);
       }
@@ -97,7 +97,7 @@ const ProductInquiries = ({ activeTab, userId, productId }) => {
 
       /** 문의 저장 API 호출 */
       const response = await call(
-        '/inquiry/saveInquiry',
+        '/inquiries',
         'POST',
         JSON.stringify(inquiryData)
       );
@@ -116,10 +116,10 @@ const ProductInquiries = ({ activeTab, userId, productId }) => {
   };
 
   /** 문의 비활성화 API 호출 */
-  const handleDeactivate = async (InquiryId) => {
+  const handleInactivate = async (InquiryId) => {
     try {
       const response = await call(
-        `/inquiry/deactivateInquiry/${InquiryId}`,
+        `/inquiries/${InquiryId}/inactivation`,
         'PATCH'
       );
 
@@ -137,7 +137,7 @@ const ProductInquiries = ({ activeTab, userId, productId }) => {
   const handleActivate = async (InquiryId) => {
     try {
       const response = await call(
-        `/inquiry/activateInquiry/${InquiryId}`,
+        `/inquiries/${InquiryId}/activation`,
         'PATCH'
       );
 
@@ -266,7 +266,7 @@ const ProductInquiries = ({ activeTab, userId, productId }) => {
                                       ) : (
                                         <button
                                           onClick={() =>
-                                            handleDeactivate(inquiry.inquiryId)
+                                            handleInactivate(inquiry.inquiryId)
                                           }
                                           className="dropdown-item"
                                         >

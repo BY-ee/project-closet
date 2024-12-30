@@ -5,6 +5,9 @@ import { Link, useNavigate } from 'react-router-dom';
 // CSS
 import './BoardList.css';
 
+// Images
+import DefaultPfp from '../../../assets/images/default_profile.png';
+
 // Components
 import { getAllboard, searchBoards } from '../../../api/community/board/Board';
 
@@ -18,7 +21,7 @@ const BoardList = () => {
   const navigate = useNavigate();
 
   const handleWriteButtonClick = () => {
-    navigate('/WritePost');
+    navigate('write');
   };
 
   // 데이터 불러오기 함수
@@ -144,9 +147,9 @@ const BoardList = () => {
                                 src={
                                   item.boardImage
                                     ? `http://localhost:8090/images/${item.boardImage}`
-                                    : 'https://bootdey.com/img/Content/avatar/avatar7.png'
+                                    : DefaultPfp
                                 }
-                                alt={item.boardTitle}
+                                alt=""
                               />
                             </div>
                           </td>

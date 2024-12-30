@@ -1,6 +1,6 @@
 // Hooks
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useUser } from '../../../contexts/UserContext';
 
 // Images
@@ -27,14 +27,14 @@ const CoordiList = () => {
       alert('로그인이 필요합니다.');
       return;
     }
-    navigate('/upload'); // 업로드 페이지로 이동
+    navigate('upload'); // 업로드 페이지로 이동
   };
 
   // 코디 데이터 가져오기
   useEffect(() => {
     const fetchCoordiData = async () => {
       try {
-        const response = await call('/coordi/list');
+        const response = await call('/coordi');
         console.log(response);
         if (!response.ok) {
           // throw new Error('Failed to fetch coordi data');
@@ -64,7 +64,7 @@ const CoordiList = () => {
       // 좋아요 상태 조회
       try {
         const likeData = await call(
-          `/coordi/like/status?coordiBoardId=${coordi.id}&userId=${user.id}`
+          `/coordi/like/me?coordiBoardId=${coordi.id}`
         );
         if (!likeData.ok) {
           // throw new Error('Failed to fetch like status');
@@ -89,14 +89,10 @@ const CoordiList = () => {
       return;
     }
     try {
-      const likeData = await call(
-        '/coordi/like',
-        'POST',
-        JSON.stringify({
-          coordiBoardId: selectedCoordi.id,
-          userId: user.id,
-        })
-      );
+      const likeData = await call('/coordi/like', 'POST', {
+        coordiBoardId: selectedCoordi.id,
+        userId: user.id,
+      });
       if (!likeData.ok) {
         // throw new Error('Failed to toggle like');
       }
@@ -251,8 +247,8 @@ const CoordiList = () => {
             올리고 다른 사람들과 공유해 보세요.
           </p>
           <p className="mb-0">
-            새로운 코디를 올리고 싶으신가요? <a href="/upload">코디 올리기</a>를
-            클릭해보세요!
+            새로운 코디를 올리고 싶으신가요?{' '}
+            <Link to="/upload">코디 올리기</Link>를 클릭해보세요!
           </p>
         </div>
       </footer>

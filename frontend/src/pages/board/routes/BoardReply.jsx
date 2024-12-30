@@ -11,8 +11,9 @@ import {
   getRepliesByBoardId,
   addReply,
   deleteReply,
-  updateReply,
+  newComment,
 } from '../../../api/community/board/Reply';
+import { call } from '../../../api/auth/ApiService';
 
 const BoardReply = () => {
   const { boardId } = useParams(); // 게시글 ID 가져오기
@@ -24,7 +25,7 @@ const BoardReply = () => {
   // 댓글 목록 불러오기
   const fetchReplies = async () => {
     try {
-      const data = await getRepliesByBoardId(boardId);
+      const data = await call(`/board/${boardId}/comments`);
       setReplies(data);
     } catch (error) {
       console.error('댓글 불러오기 실패:', error);
@@ -48,13 +49,12 @@ const BoardReply = () => {
     }
 
     try {
-      await addReply(
-        JSON.stringify({
-          boardId: boardId,
-          replyContent: newReply,
-          userId: user.id,
-        })
-      );
+      const comment = {
+        boardId: boardId,
+        replyContent: newReply,
+        userId: user.id,
+      };
+      call(`/board/${boardId}/comments`, 'POST', comment);
       setNewReply('');
       fetchReplies();
     } catch (error) {
@@ -67,7 +67,10 @@ const BoardReply = () => {
   const handleDeleteReply = async (replyId) => {
     if (window.confirm('정말 이 댓글을 삭제하시겠습니까?')) {
       try {
-        const result = await deleteReply(replyId);
+        const result = await call(
+          `/board/${boardId}/comments/${replyId}`,
+          'DELETE'
+        );
         alert(result.message || '댓글이 성공적으로 삭제되었습니다.'); // 서버 메시지 표시
         fetchReplies();
       } catch (error) {
@@ -88,13 +91,11 @@ const BoardReply = () => {
       return;
     }
     try {
-      await updateReply(
-        replyId,
-        JSON.stringify({
-          replyContent: editingReply.replyContent,
-          userId: user.id,
-        })
-      );
+      const newComment = {
+        replyContent: editingReply.replyContent,
+        userId: user.id,
+      };
+      await call(`/board/${boardId}/comments/${replyId}`, 'PUT', newComment);
       setEditingReply(null);
       fetchReplies();
     } catch (error) {

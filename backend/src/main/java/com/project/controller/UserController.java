@@ -8,7 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import com.project.domain.Users;
-import com.project.dto.CustomUserDetail;
+import com.project.dto.CustomUserDetails;
 import com.project.dto.ResponseDTO;
 import com.project.dto.UserDTO;
 import com.project.security.TokenProvider;
@@ -21,30 +21,26 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.Collections;
 import java.util.Map;
 
-@Slf4j
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/api/auth")
+@RequiredArgsConstructor
+@Slf4j
 public class UserController {
-
     private final UserService userService;
-    private final ItemService itemService;
 
     final TokenProvider tokenProvider;
 
     final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @GetMapping("/me")
-    public CustomUserDetail getCurrentUser(){
+    public Users getCurrentUser() {
         // SecurityContext에서 인증 정보 가져오기
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null && authentication.getPrincipal() instanceof CustomUserDetail) {
-            return (CustomUserDetail) authentication.getPrincipal();
+        if (authentication != null && authentication.getPrincipal() instanceof CustomUserDetails userDetails) {
+            return userDetails.getUser();
         }
 
-        log.info("Authentication object: {}", authentication);
-        return null;
-
+        throw new IllegalStateException("인증 정보가 유효하지 않습니다.");
     }
 
     @PostMapping("/signup")
@@ -91,7 +87,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("/signin")
+    @PostMapping("/login")
     public ResponseEntity<?> authenticate(@RequestBody UserDTO userDTO){
         // 자격 증명 확인
         Users user = userService.getByCredentials(

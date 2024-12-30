@@ -16,7 +16,7 @@ const MyReservation = () => {
 
   const fetchReservations = async () => {
     try {
-      const response = await call('/mypage/getMyReservation');
+      const response = await call('/mypage/styling');
       setReservations(response.data); // API의 응답 구조에 따라 수정
     } catch (error) {
       console.error('Error fetching reservations:', error);

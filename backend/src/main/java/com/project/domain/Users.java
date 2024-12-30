@@ -80,7 +80,7 @@ public class Users {
 
     private String role; // 역할
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "grade_id" ,referencedColumnName = "id", nullable = false)
     private Grade grade; // 등급
 

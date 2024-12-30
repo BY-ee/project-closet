@@ -16,7 +16,7 @@ const MyOrderHistory = () => {
   // API 데이터 호출 및 그룹화
   const fetchPurchaseHistory = async () => {
     try {
-      const response = await call('/mypage/getOrderInfo');
+      const response = await call('/mypage/order');
 
       console.log('Raw response data:', response);
 

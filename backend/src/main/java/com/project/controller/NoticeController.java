@@ -3,8 +3,7 @@ package com.project.controller;
 import com.project.domain.Notice;
 import com.project.service.NoticeService;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,8 +15,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
-public class HomeController {
-    private final Logger logger = LoggerFactory.getLogger(HomeController.class);
+@Slf4j
+public class NoticeController {
     private final NoticeService noticeService;
 
     // 모든 공지 조회
@@ -41,7 +40,7 @@ public class HomeController {
             Notice notice = noticeService.findNoticeById(id);
             return ResponseEntity.status(200).body(notice);
         } catch (IllegalArgumentException e) {
-            logger.error(e.getMessage());
+            log.error(e.getMessage());
             return ResponseEntity.noContent().build();
         }
     }

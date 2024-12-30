@@ -14,6 +14,7 @@ const MyPageHome = () => {
   const { user } = useUser();
   const [gradeInfo, setGradeInfo] = useState('');
   const [profileImageUrl, setProfileImageUrl] = useState('');
+
   const handleProfileUpload = async (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -21,11 +22,7 @@ const MyPageHome = () => {
       formData.append('file', file);
 
       try {
-        const response = await call(
-          '/mypage/uploadProfileImage',
-          'POST',
-          formData
-        );
+        const response = await call('/mypage/profile-image', 'POST', formData);
 
         if (response.ok) {
           const fileName = await response.text(); // 반환된 파일명
@@ -43,7 +40,7 @@ const MyPageHome = () => {
 
   const fetchGradeInfo = async () => {
     try {
-      const response = await call(`/mypage/findGradeByUser`);
+      const response = await call(`/mypage/grade`);
       setGradeInfo(response.data);
     } catch (error) {
       console.error('에러발생 , 등급조회 에러', error);
@@ -52,7 +49,7 @@ const MyPageHome = () => {
   useEffect(() => {
     const fetchProfileImage = async () => {
       try {
-        const response = await call('/mypage/getProfileImage');
+        const response = await call('/mypage/profile-image');
 
         if (response.ok) {
           const blob = await response.blob();

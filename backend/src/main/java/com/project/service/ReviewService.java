@@ -65,7 +65,7 @@ public class ReviewService {
         reviewRepository.save(review);
     }
 
-    public void deactivateReview(Long reviewId) {
+    public void inactivateReview(Long reviewId) {
         ItemReview review = reviewRepository.findById(reviewId)
                 .orElseThrow(() -> new IllegalStateException("Review not found"));
 

@@ -20,6 +20,7 @@ import formatToKRW from '../../utils/formatToKRW';
 
 // Components
 import { call } from '../../api/auth/ApiService';
+import { Link } from 'react-router-dom';
 
 const CheckoutPage = () => {
   const { user } = useUser(); // 사용자 정보 로드
@@ -58,9 +59,7 @@ const CheckoutPage = () => {
 
   const fetchTotalPoints = async () => {
     try {
-      const response = await call('/point/getTotalPointByUserid', 'POST', {
-        userId: user.id,
-      });
+      const response = await call('/points/total');
       setTotalPoints(response);
     } catch (error) {
       console.error('Error fetching total points:', error);
@@ -238,13 +237,13 @@ const CheckoutPage = () => {
           className="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg"
           style={{ marginTop: '-70px', marginBottom: '70px' }}
         >
-          <a href="/" className="stext-109 cl8 hov-cl1 trans-04">
+          <Link to="/" className="stext-109 cl8 hov-cl1 trans-04">
             Home
             <i
               className="fa fa-angle-right m-l-9 m-r-10"
               aria-hidden="true"
             ></i>
-          </a>
+          </Link>
           <span className="stext-109 cl4">장바구니</span>
         </div>
 

@@ -84,11 +84,7 @@ const PaymentResult = () => {
     console.log('updateBasketStatus Start:  ', basketIds, status);
 
     const payload = { basketIds, status };
-    const response = await call(
-      'http://localhost:8090/api/basket/updateStatus',
-      'PATCH',
-      payload
-    );
+    const response = await call('/basket', 'PATCH', payload);
     if (response.data && response.data.success) {
       return true;
     } else {

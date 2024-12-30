@@ -27,25 +27,21 @@ const BoardWrite = () => {
     const requestBody = {
       boardTitle: title,
       boardContent: content,
-      userId: user.id, // 사용자 ID 확인
+      userId: user.id,
     };
 
-    console.log('Request Payload:', requestBody); // JSON 데이터 확인
+    console.log('Request Payload:', requestBody);
 
     try {
-      const response = await call(
-        '/board/write',
-        'POST',
-        JSON.stringify({
-          boardTitle: title,
-          boardContent: content,
-          userId: user.id, // 사용자 ID 추가
-        })
-      );
+      const response = await call('/board/write', 'POST', {
+        boardTitle: title,
+        boardContent: content,
+        userId: user.id,
+      });
 
       if (response.ok) {
         alert('글이 작성되었습니다.');
-        navigate('/community'); // 글 작성 후 게시판으로 이동
+        navigate('/board'); // 글 작성 후 게시판으로 이동
       } else {
         alert('글 작성 중 오류가 발생했습니다.');
       }

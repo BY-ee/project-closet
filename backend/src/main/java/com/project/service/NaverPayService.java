@@ -1,6 +1,7 @@
 package com.project.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,9 +14,8 @@ import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class NaverPayService {
-
-    private static final Logger logger = LoggerFactory.getLogger(NaverPayService.class);
 
     @Value("${naverpay.base-api-url}")
     private String baseApiUrl;
@@ -39,25 +39,25 @@ public class NaverPayService {
         HttpEntity<Map<String, String>> requestEntity = new HttpEntity<>(requestBody, headers);
 
         try {
-            logger.info("네이버페이 승인 요청 URL: {}", apiUrl);
-            logger.info("네이버페이 승인 요청 바디: {}", requestBody);
+            log.info("네이버페이 승인 요청 URL: {}", apiUrl);
+            log.info("네이버페이 승인 요청 바디: {}", requestBody);
 
             ResponseEntity<Map> response = restTemplate.exchange(apiUrl, HttpMethod.POST, requestEntity, Map.class);
 
-            logger.info("네이버페이 승인 응답: {}", response.getBody());
+            log.info("네이버페이 승인 응답: {}", response.getBody());
 
             if (response.getStatusCode() == HttpStatus.OK) {
                 String code = (String) response.getBody().get("code");
                 if ("SUCCESS".equalsIgnoreCase(code)) {
-                    logger.info("결제 승인 성공");
+                    log.info("결제 승인 성공");
                     return true;
                 }
             }
-            logger.warn("결제 승인 실패: {}", response.getBody());
+            log.warn("결제 승인 실패: {}", response.getBody());
             return false;
 
         } catch (Exception e) {
-            logger.error("결제 승인 중 오류 발생: ", e);
+            log.error("결제 승인 중 오류 발생: ", e);
             return false;
         }
     }

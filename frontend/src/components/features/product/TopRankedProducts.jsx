@@ -12,30 +12,36 @@ import Slider from 'react-slick';
 import { call } from '../../../api/auth/ApiService';
 
 const TopRankedProducts = () => {
-  const [category, setCategory] = useState('itemPrice'); // 카멜케이스로 수정
-  const [subject, setSubject] = useState('week'); // 주간, 월간 랭킹 등을 위한 상태값
-  const [rankedItems, setRankedItems] = useState([]); // 순위 상위권 상품 상태
+  const [filter, setFilter] = useState('views'); // 조회수, 좋아요 등의 필터 상태
+  const [range, setRange] = useState('week'); // 주간, 월간 랭킹 등의 날짜 상태
+  const [rankedProducts, setRankedProducts] = useState([]); // 순위 상위권 상품
 
   // 순위 상위권 상품 가져오는 함수
-  const fetchTopItems = async () => {
-    try {
-      const response = await call('/items/top/itemName');
-      setRankedItems(response);
-    } catch (error) {
-      console.error('Error fetching reservations:', error);
-    }
-  };
-
-  // 페이지 로드 시 함수 호출
   useEffect(() => {
+    const fetchTopItems = async () => {
+      try {
+        const response = await call(
+          `/products/top?filter=${filter}&range=${range}`
+        );
+        setRankedProducts(response);
+      } catch (error) {
+        console.error('Error fetching reservations:', error);
+      }
+    };
     fetchTopItems();
-  }, []);
+  }, [filter, range]);
 
   // 날짜 필터링에 따른 소제목 한글화
-  const titleBySubject = {
+  const convertRange = {
     day: '일간',
     week: '주간',
     month: '월간',
+  };
+
+  const convertFilter = {
+    views: '조회수',
+    likes: '좋아요',
+    reviewCount: '리뷰',
   };
 
   // slick 속성
@@ -71,13 +77,15 @@ const TopRankedProducts = () => {
     <div className="sec-banner bg0 p-t-80 p-b-50">
       <div className="container">
         <h3 className="ltext-103 cl5 m-b-30">
-          <b>{titleBySubject[subject]} 랭킹</b>
+          <b>
+            {convertRange[range]} {convertFilter[filter]} Top 3
+          </b>
         </h3>
 
         {/* 슬라이더 */}
         <div className="slick-container">
           <Slider {...settings}>
-            {rankedItems.map((rankedItem) => (
+            {rankedProducts.map((rankedItem) => (
               <div
                 key={rankedItem.id}
                 className="col-md-4 col-xl-4 p-b-30 m-lr-auto"
@@ -88,7 +96,7 @@ const TopRankedProducts = () => {
                     alt="IMG-BANNER"
                   />
                   <Link
-                    to={`/Detail/${rankedItem.id}`}
+                    to={`/products/${rankedItem.id}`}
                     className="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3"
                   >
                     <div className="block1-txt-child1 flex-col-l">
@@ -114,7 +122,7 @@ const TopRankedProducts = () => {
         {/* 페이지의 width가 768px 이상일 때 일반 이미지 출력 */}
         <div className="image-container">
           <div className="row">
-            {rankedItems.map((rankedItem) => (
+            {rankedProducts.map((rankedItem) => (
               <div
                 key={rankedItem.id}
                 className="col-md-4 col-xl-4 p-b-30 m-lr-auto"
@@ -126,7 +134,7 @@ const TopRankedProducts = () => {
                   />
 
                   <Link
-                    to={`/Detail/${rankedItem.id}`}
+                    to={`/products/${rankedItem.id}`}
                     className="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3"
                   >
                     <div className="block1-txt-child1 flex-col-l">

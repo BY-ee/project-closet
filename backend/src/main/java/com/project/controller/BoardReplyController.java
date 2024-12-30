@@ -4,6 +4,7 @@ import com.project.domain.BoardReply;
 import com.project.dto.BoardReplyDTO;
 import com.project.service.BoardReplyService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,8 +12,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @RestController
-@RequestMapping("/api/replies")
+@RequestMapping("/api/board/{boardId}/comments")
 @RequiredArgsConstructor
 public class BoardReplyController {
     private final BoardReplyService replyService;
@@ -25,7 +27,7 @@ public class BoardReplyController {
     }
 
     // 댓글 조회
-    @GetMapping("/board/{boardId}")
+    @GetMapping
     public ResponseEntity<List<BoardReplyDTO>> getReplies(@PathVariable Long boardId) {
         return ResponseEntity.ok(replyService.getRepliesByBoardId(boardId));
     }

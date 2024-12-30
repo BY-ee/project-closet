@@ -52,7 +52,7 @@ const ChangePassword = () => {
         '비밀번호가 성공적으로 변경되었습니다. 다시 로그인해주세요.'
       );
       // 일정 시간 후 로그인 페이지로 이동할 수도 있음
-      // setTimeout(() => navigate('/signin'), 2000);
+      // setTimeout(() => navigate('/login'), 2000);
     } catch (error) {
       setErrorMessage(error.message);
     }

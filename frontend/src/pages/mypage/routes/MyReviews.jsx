@@ -19,13 +19,12 @@ const MyReviews = () => {
   const [currentPage, setCurrentPage] = useState(0); // 현재 페이지 번호
   const pageSize = 5; // 페이지당 리뷰 수
   const [loading, setLoading] = useState(true); // 로딩 상태
-  const navigate = useNavigate(); // useNavigate 초기화
 
   // API 호출 함수
   const fetchMyReviews = async (page) => {
     try {
       const response = await call(
-        `/mypage/getMyReviews?page=${page}&size=${pageSize}`
+        `/mypage/reviews?page=${page}&size=${pageSize}`
       );
 
       // 응답 데이터 처리

@@ -14,14 +14,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/styling")
 @RequiredArgsConstructor
 @Slf4j
 public class StylingController {
 
     private final StylingService stylingService;
 
-    @PostMapping("/book/coordi")
+    @PostMapping
     public ResponseEntity<Map<String, String>> reserveStyling(@RequestBody ReservationDTO reservationDTO) {
         log.info("reserveStyling {}", reservationDTO);
         

@@ -1,10 +1,12 @@
 package com.project.controller;
 
 import com.project.dto.CoordiBoardDTO;
+import com.project.dto.CustomUserDetails;
 import com.project.dto.LikeDTO;
 import com.project.service.CoordiBoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,6 +19,13 @@ import java.util.List;
 public class CoordiBoardController {
 
     private final CoordiBoardService coordiBoardService;
+
+    // 코디 게시글 전체 조회 (DTO)
+    @GetMapping
+    public ResponseEntity<List<CoordiBoardDTO>> getCoordiList() {
+        List<CoordiBoardDTO> coordiBoards = coordiBoardService.getAllCoordis();
+        return ResponseEntity.ok(coordiBoards);
+    }
 
     // 코디업로드
     @PostMapping("/upload")
@@ -34,13 +43,6 @@ public class CoordiBoardController {
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(400).body(e.getMessage());
         }
-    }
-
-    // 코디 게시글 전체 조회 (DTO)
-    @GetMapping("/list")
-    public ResponseEntity<List<CoordiBoardDTO>> getCoordiList() {
-        List<CoordiBoardDTO> coordiBoards = coordiBoardService.getAllCoordis();
-        return ResponseEntity.ok(coordiBoards);
     }
 
     // 코디 게시글 삭제
@@ -62,9 +64,11 @@ public class CoordiBoardController {
     }
 
     // 좋아요 상태 조회
-    @GetMapping("/like/status")
+    @GetMapping("/like/me")
     public ResponseEntity<LikeDTO> getLikeStatus(
-            @RequestParam Long coordiBoardId, @RequestParam Long userId) {
+            @RequestParam Long coordiBoardId,
+            @AuthenticationPrincipal CustomUserDetails userDetails) {
+        Long userId = userDetails.getId();
         LikeDTO response = coordiBoardService.getLikeStatus(coordiBoardId, userId);
         return ResponseEntity.ok(response);
     }

@@ -1,6 +1,6 @@
 // Hooks
 import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom'; // 라우트 관련 훅
+import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom'; // 라우트 관련 훅
 
 // CSS
 import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstrap CSS
@@ -24,13 +24,11 @@ import GuidesOfService from './components/features/policy/GuidesOfService';
 import TermsSwitcher from './components/features/policy/TermsSwitcher';
 import PrivacyPolicy from './components/features/policy/PrivacyPolicy';
 
-import Auth from './pages/auth/Auth';
 import Mypage from './pages/mypage/Mypage';
 
 import ProductList from './pages/product/ProductList';
 import ProductDetail from './pages/product/ProductDetail';
 import CheckoutPage from './pages/checkout/CheckoutPage';
-import ImageComponent from './pages/checkout/ImageComponent';
 
 import Board from './pages/board/Board';
 import Coordi from './pages/coordi/Coordi';
@@ -38,6 +36,37 @@ import Styling from './pages/styling/Styling';
 
 import Admin from './pages/admin/Admin';
 import NotFound from './pages/error/NotFound';
+import authRoutes from './pages/auth/authRoutes';
+
+/**
+ * Header, Footer가 포함된 기본 레이아웃입니다.
+ *
+ * @param {JSX.Element} children 리액트 컴포넌트입니다.
+ * @returns
+ */
+const DefaultLayout = () => (
+  <>
+    <Header />
+    <main>
+      <Outlet />
+    </main>
+    <Footer />
+  </>
+);
+
+/**
+ * Header, Footer가 없는 레이아웃입니다.
+ *
+ * @param {JSX.Element} children 리액트 컴포넌트입니다.
+ * @returns
+ */
+const MinimalLayout = () => (
+  <>
+    <main>
+      <Outlet />
+    </main>
+  </>
+);
 
 /**
  * App 전체 라우팅을 관리하는 컴포넌트입니다.
@@ -49,46 +78,40 @@ function App() {
       <BasketProvider>
         <Animation>
           <BrowserRouter>
-            <Header />
             <ScrollToTop />
             <Routes>
               {/* -------------------------------------------------------------------------- */}
-              {/* 메인 페이지 */}
-              <Route path="/" element={<Home />} />
-              {/* 이용안내 페이지 */}
-              <Route path="/guide" element={<GuidesOfService />} />
-              {/* 이용약관 페이지 */}
-              <Route path="/terms" element={<TermsSwitcher />} />
-              {/* 개인정보처리방침 페이지 */}
-              <Route path="/privacy" element={<PrivacyPolicy />} />
+              <Route element={<DefaultLayout />}>
+                <Route path="/" element={<Home />} />
+
+                <Route path="/guide" element={<GuidesOfService />} />
+                <Route path="/terms" element={<TermsSwitcher />} />
+                <Route path="/privacy" element={<PrivacyPolicy />} />
+
+                <Route path="/mypage/*" element={<Mypage />} />
+
+                <Route path="/products" element={<ProductList />} />
+                <Route
+                  path="/products/:productId"
+                  element={<ProductDetail />}
+                />
+                <Route path="/checkout" element={<CheckoutPage />} />
+
+                <Route path="/styling" element={<Styling />} />
+
+                <Route path="/board/*" element={<Board />} />
+                <Route path="/coordi/*" element={<Coordi />} />
+              </Route>
               {/* -------------------------------------------------------------------------- */}
-              {/* 회원 관련 라우트 */}
-              <Route path="/*" element={<Auth />} />
-              {/* 마이페이지 */}
-              <Route path="/mypage/*" element={<Mypage />} />
-              {/* -------------------------------------------------------------------------- */}
-              {/* 상품 페이지  */}
-              <Route path="/products" element={<ProductList />} />
-              {/* 상품 상세 페이지 */}
-              <Route path="/products/:productId" element={<ProductDetail />} />
-              {/* 추천 페이지 */}
-              <Route path="/styling" element={<Styling />} />
-              {/* 상품구매 페이지 */}
-              <Route path="/checkout" element={<CheckoutPage />} />
-              {/* -------------------------------------------------------------------------- */}
-              {/* 커뮤니티 페이지 */}
-              <Route path="/board/*" element={<Board />} />
-              <Route path="/coordi/*" element={<Coordi />} />
-              {/* -------------------------------------------------------------------------- */}
-              {/* 관리자 페이지 */}
-              <Route path="/admin/*" element={<Admin />} />
-              {/* ------------------------------------------------------------------- */}
-              {/* 에러 페이지 */}
-              <Route path="/ImageComponent" element={<ImageComponent />} />
-              {/* 에러 페이지 */}
-              <Route path="/*" element={<NotFound />} />
+
+              <Route element={<MinimalLayout />}>
+                {authRoutes}
+
+                <Route path="/admin/*" element={<Admin />} />
+              </Route>
+
+              <Route path="*" element={<NotFound />} />
             </Routes>
-            <Footer />
           </BrowserRouter>
         </Animation>
       </BasketProvider>

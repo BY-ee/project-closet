@@ -74,13 +74,13 @@ const MobileMenuModal = ({
           <Link to="/shop">악세서리</Link>
         </li>
         <li>
-          <Link to="/cart">장바구니</Link>
+          <Link to="/checkout">장바구니</Link>
         </li>
         <li className="label1-mobile" data-label1="hot">
           <Link to="/styling">스타일링</Link>
         </li>
         <li>
-          <Link to="/community">자유게시판</Link>
+          <Link to="/board">자유게시판</Link>
         </li>
         <li>
           <Link to="/coordi">코디자랑</Link>

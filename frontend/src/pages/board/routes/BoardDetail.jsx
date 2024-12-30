@@ -50,7 +50,7 @@ const BoardDetail = () => {
       try {
         await deleteBoard(boardId); // 삭제 API 호출
         alert('게시글이 삭제되었습니다.');
-        navigate('/community'); // 삭제 후 게시판 목록으로 이동
+        navigate('/board'); // 삭제 후 게시판 목록으로 이동
       } catch (error) {
         alert('게시글 삭제 중 오류가 발생했습니다.');
       }
@@ -89,7 +89,7 @@ const BoardDetail = () => {
       <div className="board-actions">
         <button
           className="btn btn-secondary"
-          onClick={() => navigate('/community')}
+          onClick={() => navigate('/board')}
         >
           목록으로
         </button>

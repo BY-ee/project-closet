@@ -81,7 +81,7 @@ const MyInfo = () => {
       }
 
       try {
-        const response = await call('/mypage/changePwd', 'PUT', {
+        const response = await call('/mypage/password', 'PUT', {
           password,
         });
 
@@ -100,7 +100,7 @@ const MyInfo = () => {
 
     if (formName === 'changebodyInfo') {
       try {
-        const response = await call('/mypage/changeBodyInfo', 'PUT', {
+        const response = await call('/mypage/body', 'PUT', {
           height: bodyInfo.height,
           weight: bodyInfo.weight,
           size: bodyInfo.size,
@@ -124,7 +124,7 @@ const MyInfo = () => {
       const confirmPassword = data.confirmPassword?.trim(); // 입력값 가져오기
 
       try {
-        const response = await call(`/mypage/changeAddInfo`, 'PUT', {
+        const response = await call(`/mypage/info`, 'PUT', {
           name: addInfo.name,
           phone: addInfo.phone1 + addInfo.phone2 + addInfo.phone3,
           style: addInfo.style,
@@ -150,7 +150,7 @@ const MyInfo = () => {
 
   const fetchData = async () => {
     try {
-      const address = await call(`/mypage/getAddress?userId=${user?.id}`);
+      const address = await call(`/mypage/address`);
       const representative = address.find((addr) => addr.isRepresent === true);
       const general = address.filter((addr) => addr.isRepresent !== true);
 
@@ -168,7 +168,7 @@ const MyInfo = () => {
     const data = { address: fullAddress };
 
     try {
-      const response = await call('/mypage/addAddress', 'POST', data);
+      const response = await call('/mypage/address', 'POST', data);
 
       if (response.status === 'success') {
         alert(response.message);
@@ -224,7 +224,7 @@ const MyInfo = () => {
 
   const switchRepresentativeAddress = async (id) => {
     try {
-      await call(`/mypage/switchRepresentativeAddress/${id}`, 'PUT');
+      await call(`/mypage/addresses/${id}/default`, 'PUT');
       alert('대표 주소지가 변경되었습니다.');
       fetchData(); // 데이터 새로고침
     } catch (error) {
@@ -237,7 +237,7 @@ const MyInfo = () => {
   const DeleteRepresentativeAddress = async (id) => {
     if (generalAddresses.length === 0) {
       try {
-        await call(`/mypage/deleteAddress/${id}`, 'DELETE');
+        await call(`/mypage/addresses/${id}`, 'DELETE');
         fetchData(); // 변경 후 데이터 다시 가져오기
       } catch (error) {
         console.error('Error deleting address:', error);
@@ -251,7 +251,7 @@ const MyInfo = () => {
 
   // 일반 주소 삭제
   const DeleteGeneralAddress = (id) => {
-    call(`/mypage/deleteAddress/${id}`, 'DELETE', { cache: 'no-store' })
+    call(`/mypage/addresses/${id}`, 'DELETE', { cache: 'no-store' })
       .then((response) => {
         if (response.ok) {
           fetchData(); // 변경 후 데이터를 다시 가져와 상태 업데이트

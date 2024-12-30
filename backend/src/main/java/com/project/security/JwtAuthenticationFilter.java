@@ -23,12 +23,12 @@ import java.util.Map;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final TokenProvider tokenProvider; // JWT 토큰을 검증하고 파싱하는 역할
-    private final CustomUserDetailsService customUserDetailsService; // 사용자 정보를 로드하는 서비스
+    private final CustomUserDetailsService userDetailsService; // 사용자 정보를 로드하는 서비스
 
     // 생성자: 필요한 의존성 주입
-    public JwtAuthenticationFilter(TokenProvider tokenProvider, CustomUserDetailsService customUserDetailsService) {
+    public JwtAuthenticationFilter(TokenProvider tokenProvider, CustomUserDetailsService userDetailsService) {
         this.tokenProvider = tokenProvider;
-        this.customUserDetailsService = customUserDetailsService;
+        this.userDetailsService = userDetailsService;
     }
 
     /**
@@ -55,7 +55,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 log.info("Token validation result: {}", userInfo);
 
                 // 4. 사용자 정보를 로드 (DB에서 사용자 정보 조회)
-                UserDetails userDetails = customUserDetailsService.loadUserByUsername(username);
+                UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
                 // 5. 인증 객체 생성 (SecurityContext에 저장할 인증 정보)
                 AbstractAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(

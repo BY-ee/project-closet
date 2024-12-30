@@ -16,7 +16,7 @@ import java.io.IOException; // IOException 처리
 @RequestMapping("/api/images")
 public class ImageController {
 
-    private static final String IMAGE_DIR = "C:/closetImage/coordi"; // 변경된 경로
+    private static final String IMAGE_DIR = "images";
 
     @GetMapping("/{filename}")
     public ResponseEntity<Resource> getImage(@PathVariable String filename) throws IOException {

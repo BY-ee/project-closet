@@ -1,6 +1,6 @@
 // Hooks
 import React, { useEffect, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import { useUser } from '../../contexts/UserContext';
 import { useCart } from '../../contexts/BasketContext';
 import useProductQuantity from '../../hooks/useProductQuantity';
@@ -21,8 +21,7 @@ const ProductDetail = () => {
   // ----------------------------------------------------------------
   // URL parameter로 받은 productId를 state로 관리합니다.
   const params = useParams();
-  const { productId } = params;
-  const [currentProductId, setCurrentProductId] = useState(null);
+  const [productId, setProductId] = useState(null);
   // ----------------------------------------------------------------
   const [product, setProduct] = useState([]); // Fetch된 데이터 저장
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -39,12 +38,12 @@ const ProductDetail = () => {
 
   const userId = user?.id || '';
 
-  // productId가 truthy일 경우 상태를 저장합니다.
+  // 경로 변수 params가 truthy일 경우 상태를 저장합니다.
   useEffect(() => {
-    if (productId) {
-      setCurrentProductId(productId);
+    if (params) {
+      setProductId(params);
     }
-  }, [productId]);
+  }, [params]);
 
   useEffect(() => {
     setBasket([]); // 초기화
@@ -53,9 +52,9 @@ const ProductDetail = () => {
   // 컴포넌트 로드 시 id에 따른 상품 데이터를 가져옵니다.
   useEffect(() => {
     async function fetchDetail() {
-      if (currentProductId) {
+      if (productId) {
         try {
-          const response = await call(`/itemDetail/${currentProductId}`);
+          const response = await call(`/products/${productId}`);
 
           await console.log(response);
           setProduct(response);
@@ -65,13 +64,13 @@ const ProductDetail = () => {
       }
     }
     fetchDetail();
-  }, [currentProductId]);
+  }, [productId]);
 
   // 컴포넌트 로드 시 리뷰 개수를 가져옵니다.
   useEffect(() => {
     async function fetchReviewCount() {
       try {
-        const response = await call(`/countReview/${currentProductId}`);
+        const response = await call(`/reviews/products/${productId}/count`);
 
         setCountReview(response);
       } catch (error) {
@@ -80,14 +79,12 @@ const ProductDetail = () => {
     }
 
     fetchReviewCount();
-  }, [currentProductId]);
+  }, [productId]);
 
   useEffect(() => {
     async function fetchInquiryCount() {
       try {
-        const response = await call(
-          `/inquiry/getCountInquiries/${currentProductId}`
-        );
+        const response = await call(`/inquiries/products/${productId}/count`);
 
         setCountInquiry(response);
       } catch (error) {
@@ -144,7 +141,7 @@ const ProductDetail = () => {
 
     const basketData = {
       userId: userId,
-      itemDetailId: currentProductId,
+      itemDetailId: productId,
       itemCount: quantity,
       size: selectedSize,
       color: selectedColor,
@@ -154,11 +151,7 @@ const ProductDetail = () => {
     };
 
     try {
-      const response = await call(
-        `/basket/saveBasket`,
-        'POST',
-        JSON.stringify(basketData)
-      );
+      const response = await call(`/basket`, 'POST', basketData);
 
       if (!response.ok) {
         // throw new Error('Failed to save basket');
@@ -178,32 +171,32 @@ const ProductDetail = () => {
     }
   };
 
-  if (!currentProductId) {
+  if (!productId) {
     return <div>Loading...</div>;
   }
 
   return (
     <>
-      {currentProductId && (
+      {productId && (
         <>
           <div className="container">
             <div className="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
               {/* 크럼브 데이터 */}
-              <a href="/" className="stext-109 cl8 hov-cl1 trans-04">
+              <Link to="/" className="stext-109 cl8 hov-cl1 trans-04">
                 Home
                 <i
                   className="fa fa-angle-right m-l-9 m-r-10"
                   aria-hidden="true"
                 ></i>
-              </a>
+              </Link>
 
-              <a href="/product" className="stext-109 cl8 hov-cl1 trans-04">
+              <Link to="/products" className="stext-109 cl8 hov-cl1 trans-04">
                 Product
                 <i
                   className="fa fa-angle-right m-l-9 m-r-10"
                   aria-hidden="true"
                 ></i>
-              </a>
+              </Link>
 
               {/* 제품 이름 */}
               <span className="stext-109 cl4">
@@ -519,14 +512,14 @@ const ProductDetail = () => {
                     <ProductReviews
                       activeTab={activeTab}
                       userId={userId}
-                      productId={currentProductId}
+                      productId={productId}
                     />
 
                     {/** Inquiry Tab */}
                     <ProductInquiries
                       activeTab={activeTab}
                       userId={userId}
-                      productId={currentProductId}
+                      productId={productId}
                     />
                   </div>
                 </div>

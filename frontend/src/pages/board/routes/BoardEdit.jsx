@@ -27,7 +27,7 @@ const BoardEdit = () => {
       } catch (error) {
         console.error('게시글 데이터를 불러오는 중 오류:', error);
         alert('게시글을 불러오는 중 문제가 발생했습니다.');
-        navigate('/community'); // 오류 시 게시판으로 이동
+        navigate('/board'); // 오류 시 게시판으로 이동
       }
     };
 
